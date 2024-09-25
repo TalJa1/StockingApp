@@ -136,8 +136,10 @@ const HeaderView: React.FC = () => {
   return (
     <View style={styles.header}>
       {stocklineIcon(vw(10), vw(10))}
-      <Text>Join Stockline</Text>
-      <Text>Bắt tay vào hành trình đầu tư của bạn chỉ với đ20.000</Text>
+      <Text style={styles.label}>Join Stockline</Text>
+      <Text style={styles.underLabel}>
+        Bắt tay vào hành trình đầu tư của bạn chỉ với đ20.000
+      </Text>
     </View>
   );
 };
@@ -186,5 +188,13 @@ const styles = StyleSheet.create({
   iconButton: {
     position: 'absolute',
     right: vw(3),
+  },
+  underLabel: {
+    color: '#76787E',
+  },
+  label: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
 });
