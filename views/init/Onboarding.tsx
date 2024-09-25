@@ -16,7 +16,6 @@ import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import useStatusBar from '../../services/useStatusBar';
 import {stocklineIcon} from '../../assets/svgXML';
 import {InitPageData} from '../../services/renderData';
-import {InitPageProps} from '../../services/typeProps';
 
 const Onboarding = () => {
   useStatusBar('#1A1A1A');
@@ -40,13 +39,8 @@ const Onboarding = () => {
 };
 
 const MainLayout: React.FC = () => {
-  const [renderData, setRenderData] = useState<InitPageProps>(InitPageData[0]);
   const [currentPage, setCurrentPage] = useState(0);
   console.log('currentPage', currentPage);
-
-  useEffect(() => {
-    setRenderData(InitPageData[0]);
-  }, []);
 
   const handleMomentumScrollEnd = (
     event: NativeSyntheticEvent<NativeScrollEvent>,
@@ -62,7 +56,7 @@ const MainLayout: React.FC = () => {
         <Text style={styles.skipTxT}>Bỏ qua</Text>
       </TouchableOpacity>
       <View style={[styles.upperView, centerAll]}>
-        <Image style={styles.mainImg} source={renderData.img} />
+        <Image style={styles.mainImg} source={InitPageData[currentPage].img} />
       </View>
       <View style={styles.lowerView}>
         <FlatList
