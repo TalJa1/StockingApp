@@ -82,6 +82,18 @@ const MainLayout: React.FC = () => {
             />
           ))}
         </View>
+        <View style={styles.groupBtnBottom}>
+          <TouchableOpacity style={[styles.btnLogin, centerAll]}>
+            <Text style={[styles.btnBottomTxt, {color: '#FFED4B'}]}>
+              Đăng nhập
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.btnSignUp, centerAll]}>
+            <Text style={[styles.btnBottomTxt, {color: '#1A1A1A'}]}>
+              Đăng ký
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -145,9 +157,8 @@ const styles = StyleSheet.create({
   },
   pagination: {
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: vh(2),
     alignSelf: 'center',
+    marginBottom: vh(2),
   },
   dot: {
     width: vw(10),
@@ -157,5 +168,28 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: '#FFED4B',
+  },
+  groupBtnBottom: {
+    width: '100%',
+    paddingBottom: vh(2),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  btnBottomTxt: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  btnLogin: {
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#FFED4B',
+    width: '45%',
+    paddingVertical: vh(1),
+  },
+  btnSignUp: {
+    borderRadius: 16,
+    backgroundColor: '#FFED4B',
+    width: '45%',
+    paddingVertical: vh(1),
   },
 });
