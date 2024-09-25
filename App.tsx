@@ -19,6 +19,8 @@ import Trade from './views/bottomNavigator/Trade';
 import Stock from './views/bottomNavigator/Stock';
 import Profile from './views/bottomNavigator/Profile';
 import Onboarding from './views/init/Onboarding';
+import SignUp from './views/account/SignUp';
+import Login from './views/account/Login';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -129,6 +131,16 @@ const App = () => {
         <Stack.Screen
           name="Onboarding"
           component={Onboarding}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

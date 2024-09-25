@@ -16,6 +16,8 @@ import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import useStatusBar from '../../services/useStatusBar';
 import {stocklineIcon} from '../../assets/svgXML';
 import {InitPageData} from '../../services/renderData';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const Onboarding = () => {
   useStatusBar('#1A1A1A');
@@ -39,6 +41,7 @@ const Onboarding = () => {
 };
 
 const MainLayout: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [currentPage, setCurrentPage] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
@@ -91,12 +94,20 @@ const MainLayout: React.FC = () => {
           ))}
         </View>
         <View style={styles.groupBtnBottom}>
-          <TouchableOpacity style={[styles.btnLogin, centerAll]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Login');
+            }}
+            style={[styles.btnLogin, centerAll]}>
             <Text style={[styles.btnBottomTxt, {color: '#FFED4B'}]}>
               Đăng nhập
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.btnSignUp, centerAll]}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+            style={[styles.btnSignUp, centerAll]}>
             <Text style={[styles.btnBottomTxt, {color: '#1A1A1A'}]}>
               Đăng ký
             </Text>
