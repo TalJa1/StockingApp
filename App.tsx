@@ -29,12 +29,12 @@ const App = () => {
         <Tab.Navigator
           initialRouteName="Home"
           screenOptions={{
-            tabBarActiveTintColor: 'black',
+            tabBarActiveTintColor: '#FFED4B',
             tabBarShowLabel: false,
             tabBarStyle: {
-              borderTopColor: '#000000',
-              backgroundColor: '#000000',
-              height: vh(8),
+              borderTopColor: '#1A1A1A',
+              backgroundColor: '#1A1A1A',
+              height: vh(9),
             },
           }}>
           <Tab.Screen
@@ -45,12 +45,7 @@ const App = () => {
               tabBarIcon: ({color, focused}) => {
                 const iconSize = focused ? vw(7) : vw(6);
                 return (
-                  <View
-                    style={[
-                      styles.iconContainer,
-                      focused && styles.focusedIcon,
-                      focused && styles.iconMoveUp,
-                    ]}>
+                  <View style={[styles.iconContainer]}>
                     {homeIcon(iconSize, iconSize, color)}
                   </View>
                 );
@@ -65,12 +60,7 @@ const App = () => {
               tabBarIcon: ({color, focused}) => {
                 const iconSize = focused ? vw(7) : vw(6);
                 return (
-                  <View
-                    style={[
-                      styles.iconContainer,
-                      focused && styles.focusedIcon,
-                      focused && styles.iconMoveUp,
-                    ]}>
+                  <View style={[styles.iconContainer]}>
                     {chartIcon(iconSize, iconSize, color)}
                   </View>
                 );
@@ -82,16 +72,11 @@ const App = () => {
             component={Trade}
             options={{
               headerShown: false,
-              tabBarIcon: ({color, focused}) => {
+              tabBarIcon: ({focused}) => {
                 const iconSize = focused ? vw(7) : vw(6);
                 return (
-                  <View
-                    style={[
-                      styles.iconContainer,
-                      focused && styles.focusedIcon,
-                      focused && styles.iconMoveUp,
-                    ]}>
-                    {tradeIcon(iconSize, iconSize, color)}
+                  <View style={[styles.iconContainer, styles.focusedIcon]}>
+                    {tradeIcon(iconSize, iconSize, '#1A1A1A')}
                   </View>
                 );
               },
@@ -105,12 +90,7 @@ const App = () => {
               tabBarIcon: ({color, focused}) => {
                 const iconSize = focused ? vw(7) : vw(6);
                 return (
-                  <View
-                    style={[
-                      styles.iconContainer,
-                      focused && styles.focusedIcon,
-                      focused && styles.iconMoveUp,
-                    ]}>
+                  <View style={[styles.iconContainer]}>
                     {stockIcon(iconSize, iconSize, color)}
                   </View>
                 );
@@ -125,12 +105,7 @@ const App = () => {
               tabBarIcon: ({color, focused}) => {
                 const iconSize = focused ? vw(7) : vw(6);
                 return (
-                  <View
-                    style={[
-                      styles.iconContainer,
-                      focused && styles.focusedIcon,
-                      focused && styles.iconMoveUp,
-                    ]}>
+                  <View style={[styles.iconContainer]}>
                     {profileIcon(iconSize, iconSize, color)}
                   </View>
                 );
@@ -180,8 +155,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFED4B',
     borderRadius: vw(8), // Adjust the radius to make it a circle
     padding: vw(4), // Adjust the padding to control the size of the circle
-  },
-  iconMoveUp: {
-    transform: [{translateY: -10}], // Adjust the value as needed
   },
 });
