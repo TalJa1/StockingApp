@@ -11,6 +11,18 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const stocklineIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.7073 32.1597L32.1835 11.6835L28.8164 8.31636L8.34017 28.7926L11.7073 32.1597Z" fill="#FFED4B"/>
+<path d="M19.8026 11.6835L11.7073 19.7788L8.34017 16.4116L16.4354 8.31636L19.8026 11.6835Z" fill="#FFED4B"/>
+<path d="M24.0883 32.1597L32.1835 24.0645L28.8164 20.6973L20.7211 28.7926L24.0883 32.1597Z" fill="#FFED4B"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 40V0H40.5V40H0.5ZM5.2619 4.7619H35.7381V35.2381H5.2619V4.7619Z" fill="#FFED4B"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const homeIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_7318_460)">

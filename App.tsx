@@ -18,6 +18,7 @@ import Chart from './views/bottomNavigator/Chart';
 import Trade from './views/bottomNavigator/Trade';
 import Stock from './views/bottomNavigator/Stock';
 import Profile from './views/bottomNavigator/Profile';
+import Onboarding from './views/init/Onboarding';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -118,11 +119,16 @@ const App = () => {
   };
   return (
     <NavigationContainer>
-      {/* Main || Login */}
-      <Stack.Navigator initialRouteName="Main">
+      {/* Main || Onboarding */}
+      <Stack.Navigator initialRouteName="Onboarding">
         <Stack.Screen
           name="Main"
           component={TabNavigator}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Onboarding"
+          component={Onboarding}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
