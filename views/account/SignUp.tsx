@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   ScrollView,
@@ -11,7 +12,12 @@ import React, {useEffect, useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
-import {passwordHiddenIcon, stocklineIcon} from '../../assets/svgXML';
+import {
+  appleIcon,
+  goggleIcon,
+  passwordHiddenIcon,
+  stocklineIcon,
+} from '../../assets/svgXML';
 import {SignUpInputFieldProps} from '../../services/typeProps';
 
 const SignUp = () => {
@@ -21,8 +27,41 @@ const SignUp = () => {
       <ScrollView>
         <HeaderView />
         <MainForm />
+        <FooterView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const FooterView: React.FC = () => {
+  return (
+    <View style={styles.footerContainer}>
+      <View style={styles.lineContainer}>
+        <View style={styles.line} />
+        <Text style={styles.orText}>Hoặc có thể tiếp tục</Text>
+        <View style={styles.line} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.txtIconGrp}>
+            {goggleIcon(vw(5), vw(5))}
+            <Text style={styles.buttonText}>Google</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <View style={styles.txtIconGrp}>
+            {appleIcon(vw(5), vw(5))}
+            <Text style={styles.buttonText}>Apple</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Text style={styles.orText}>
+          Bạn đã có tài khoản?{' '}
+          <Text style={{color: '#FFED4B', fontWeight: '600'}}>Đăng nhập</Text>
+        </Text>
+      </View>
+    </View>
   );
 };
 
@@ -161,6 +200,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw(3),
   },
   mainContainer: {
+    marginTop: vh(2),
     paddingHorizontal: vw(5),
     rowGap: vh(1.5),
   },
@@ -197,4 +237,43 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#FFFFFF',
   },
+  footerContainer: {
+    paddingHorizontal: vw(5),
+    alignItems: 'center',
+    marginTop: vh(5),
+    rowGap: vh(2),
+  },
+  lineContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#76787E',
+  },
+  orText: {
+    marginHorizontal: 10,
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  buttonContainer: {
+    width: '100%',
+    rowGap: vh(1),
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: '#76787E',
+    backgroundColor: 'transparent',
+    borderRadius: 6,
+  },
+  buttonText: {
+    color: '#76787E',
+    fontWeight: '500',
+  },
+  txtIconGrp: {flexDirection: 'row', alignItems: 'center', columnGap: vw(2)},
 });
