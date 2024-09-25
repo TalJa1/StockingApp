@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   ScrollView,
   StyleSheet,
@@ -6,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
@@ -31,13 +32,44 @@ const MainForm: React.FC = () => {
     email: '',
     password: '',
   });
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [emailWarning, setEmailWarning] = useState('');
 
   const handleInputChange = (field: string) => (text: string) => {
     setInputData(prevData => ({
       ...prevData,
       [field]: text,
     }));
+    checkIfAllFieldsFilled();
   };
+
+  const checkIfAllFieldsFilled = () => {
+    const {username, email, password} = inputData;
+    const isFormFilled = !!(username && email && password);
+    setIsFormValid(isFormFilled);
+  };
+
+  const checkEmailValidation = () => {
+    const {email} = inputData;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailValid = emailRegex.test(email);
+    setIsEmailValid(emailValid);
+    setEmailWarning(emailValid ? '' : 'Email không hợp lệ');
+    return emailValid;
+  };
+
+  const handleSubmit = () => {
+    checkEmailValidation();
+    if (!isEmailValid) {
+      return;
+    }
+    // Proceed with form submission
+  };
+
+  useEffect(() => {
+    checkIfAllFieldsFilled();
+  }, [inputData]);
 
   return (
     <View style={styles.mainContainer}>
@@ -51,12 +83,18 @@ const MainForm: React.FC = () => {
         value={inputData.email}
         onChangeText={handleInputChange('email')}
       />
+      {emailWarning ? (
+        <Text style={styles.errorText}>{emailWarning}</Text>
+      ) : null}
       <InputField
         placeholder="Mật khẩu"
         value={inputData.password}
         onChangeText={handleInputChange('password')}
       />
-      <TouchableOpacity style={styles.btnMain}>
+      <TouchableOpacity
+        style={[styles.btnMain, !isFormValid && styles.btnDisabled]}
+        disabled={!isFormValid}
+        onPress={handleSubmit}>
         <Text style={styles.btnMaintxt}>Tiếp tục</Text>
       </TouchableOpacity>
     </View>
@@ -97,7 +135,7 @@ const styles = StyleSheet.create({
   header: {
     rowGap: vh(2),
     paddingHorizontal: vw(5),
-    paddingVertical: vh(2),
+    paddingVertical: vh(4),
   },
   inputField: {
     borderWidth: 1,
@@ -118,5 +156,12 @@ const styles = StyleSheet.create({
   btnMaintxt: {
     color: 'black',
     fontWeight: '600',
+  },
+  btnDisabled: {
+    backgroundColor: '#D3D3D3',
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
   },
 });
