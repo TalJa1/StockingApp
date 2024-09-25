@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Image,
@@ -98,6 +99,11 @@ const MainForm: React.FC = () => {
         onPress={handleSubmit}>
         <Text style={styles.btnMaintxt}>Tiếp tục</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={{alignSelf: 'flex-end'}}>
+        <Text style={{color: '#FFED4B', fontWeight: '600'}}>
+          Quên mật khẩu?
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -112,6 +118,7 @@ const InputField: React.FC<SignUpInputFieldProps> = ({
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
