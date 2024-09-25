@@ -3,3 +3,9 @@ export interface InitPageProps {
   title: string;
   description: string;
 }
+
+export interface SignUpInputFieldProps {
+  placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
+}
