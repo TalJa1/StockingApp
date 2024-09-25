@@ -11,7 +11,7 @@ import React, {useEffect, useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
-import {stocklineIcon} from '../../assets/svgXML';
+import {passwordHiddenIcon, stocklineIcon} from '../../assets/svgXML';
 import {SignUpInputFieldProps} from '../../services/typeProps';
 
 const SignUp = () => {
@@ -106,15 +106,29 @@ const InputField: React.FC<SignUpInputFieldProps> = ({
   placeholder,
   value,
 }) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
   return (
-    <TextInput
-      value={value}
-      onChangeText={onChangeText}
-      placeholder={placeholder}
-      placeholderTextColor={'#76787E'}
-      style={styles.inputField}
-      secureTextEntry={placeholder === 'Mật khẩu'}
-    />
+    <View style={styles.inputContainer}>
+      <TextInput
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor={'#76787E'}
+        style={styles.inputField}
+        secureTextEntry={placeholder === 'Mật khẩu' && !isPasswordVisible}
+      />
+      {placeholder === 'Mật khẩu' && (
+        <TouchableOpacity
+          onPress={togglePasswordVisibility}
+          style={styles.iconButton}>
+          {passwordHiddenIcon(vw(6), vw(6))}
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 
@@ -138,6 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: vh(4),
   },
   inputField: {
+    flex: 1,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 16,
@@ -163,5 +178,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconButton: {
+    position: 'absolute',
+    right: vw(3),
   },
 });
