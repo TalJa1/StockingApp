@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   ScrollView,
@@ -9,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {container, vh, vw} from '../../services/styleSheet';
+import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
 import {
@@ -34,6 +33,11 @@ const SignUp = () => {
 };
 
 const FooterView: React.FC = () => {
+  const handleLoginPress = () => {
+    // Handle the login press event
+    console.log('Đăng nhập pressed');
+  };
+
   return (
     <View style={styles.footerContainer}>
       <View style={styles.lineContainer}>
@@ -55,11 +59,13 @@ const FooterView: React.FC = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View>
-        <Text style={styles.orText}>
-          Bạn đã có tài khoản?{' '}
-          <Text style={{color: '#FFED4B', fontWeight: '600'}}>Đăng nhập</Text>
-        </Text>
+      <View style={centerAll}>
+        <View style={styles.loginContainer}>
+          <Text style={styles.orText}>Bạn đã có tài khoản? </Text>
+          <TouchableOpacity onPress={handleLoginPress}>
+            <Text style={styles.loginText}>Đăng nhập</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -276,4 +282,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   txtIconGrp: {flexDirection: 'row', alignItems: 'center', columnGap: vw(2)},
+  loginContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  loginText: {
+    color: '#FFED4B',
+    fontWeight: '600',
+  },
 });
