@@ -1,4 +1,11 @@
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -49,6 +56,9 @@ const MainForm: React.FC = () => {
         value={inputData.password}
         onChangeText={handleInputChange('password')}
       />
+      <TouchableOpacity style={styles.btnMain}>
+        <Text style={styles.btnMaintxt}>Tiếp tục</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -98,5 +108,15 @@ const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: vw(5),
     rowGap: vh(1.5),
+  },
+  btnMain: {
+    backgroundColor: '#FFED4B',
+    padding: vw(3),
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+  btnMaintxt: {
+    color: 'black',
+    fontWeight: '600',
   },
 });
