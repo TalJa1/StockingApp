@@ -134,19 +134,6 @@ export default App;
 
 const styles = StyleSheet.create({
   tabnavigationStyle: {backgroundColor: '#1A1A1A', flex: 1},
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#1A1A1A',
-    width: vw(10),
-    height: vw(10),
-    borderRadius: vw(2),
-  },
-  dotStyle: {
-    height: 7,
-    width: 7,
-    borderRadius: 7,
-  },
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
