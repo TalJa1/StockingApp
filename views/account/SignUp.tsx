@@ -286,7 +286,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
   loginText: {
     color: '#FFED4B',
     fontWeight: '600',
