@@ -198,13 +198,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw(5),
     paddingVertical: vh(4),
   },
-  inputField: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 16,
-    paddingHorizontal: vw(3),
-  },
   mainContainer: {
     marginTop: vh(2),
     paddingHorizontal: vw(5),
@@ -226,6 +219,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
+  },
+  inputField: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 16,
+    paddingHorizontal: vw(3),
   },
   inputContainer: {
     flexDirection: 'row',

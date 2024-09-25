@@ -1,16 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Image,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
-import {appleIcon, goggleIcon, stocklineIcon} from '../../assets/svgXML';
+import {
+  appleIcon,
+  goggleIcon,
+  passwordHiddenIcon,
+  stocklineIcon,
+} from '../../assets/svgXML';
+import {SignUpInputFieldProps} from '../../services/typeProps';
 
 const Login = () => {
   useStatusBar('#1A1A1A');
@@ -18,9 +26,110 @@ const Login = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <HeaderView />
+        <MainForm />
         <FooterView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const MainForm: React.FC = () => {
+  const [inputData, setInputData] = useState({
+    email: '',
+    password: '',
+  });
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [emailWarning, setEmailWarning] = useState('');
+
+  const handleInputChange = (field: string) => (text: string) => {
+    setInputData(prevData => ({
+      ...prevData,
+      [field]: text,
+    }));
+    checkIfAllFieldsFilled();
+  };
+
+  const checkIfAllFieldsFilled = () => {
+    const {email, password} = inputData;
+    const isFormFilled = !!(email && password);
+    setIsFormValid(isFormFilled);
+  };
+
+  const checkEmailValidation = () => {
+    const {email} = inputData;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailValid = emailRegex.test(email);
+    setIsEmailValid(emailValid);
+    setEmailWarning(emailValid ? '' : 'Email không hợp lệ');
+    return emailValid;
+  };
+
+  const handleSubmit = () => {
+    checkEmailValidation();
+    if (!isEmailValid) {
+      return;
+    }
+    // Proceed with form submission
+  };
+
+  useEffect(() => {
+    checkIfAllFieldsFilled();
+  }, [inputData]);
+
+  return (
+    <View style={styles.mainContainer}>
+      <InputField
+        placeholder="Email"
+        value={inputData.email}
+        onChangeText={handleInputChange('email')}
+      />
+      {emailWarning ? (
+        <Text style={styles.errorText}>{emailWarning}</Text>
+      ) : null}
+      <InputField
+        placeholder="Mật khẩu"
+        value={inputData.password}
+        onChangeText={handleInputChange('password')}
+      />
+      <TouchableOpacity
+        style={[styles.btnMain, !isFormValid && styles.btnDisabled]}
+        disabled={!isFormValid}
+        onPress={handleSubmit}>
+        <Text style={styles.btnMaintxt}>Tiếp tục</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const InputField: React.FC<SignUpInputFieldProps> = ({
+  onChangeText,
+  placeholder,
+  value,
+}) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+  return (
+    <View style={styles.inputContainer}>
+      <TextInput
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor={'#76787E'}
+        style={styles.inputField}
+        secureTextEntry={placeholder === 'Mật khẩu' && !isPasswordVisible}
+      />
+      {placeholder === 'Mật khẩu' && (
+        <TouchableOpacity
+          onPress={togglePasswordVisibility}
+          style={styles.iconButton}>
+          {passwordHiddenIcon(vw(6), vw(6))}
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 
@@ -140,5 +249,42 @@ const styles = StyleSheet.create({
   loginText: {
     color: '#FFED4B',
     fontWeight: '600',
+  },
+  inputField: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 16,
+    paddingHorizontal: vw(3),
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconButton: {
+    position: 'absolute',
+    right: vw(3),
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  mainContainer: {
+    marginTop: vh(2),
+    paddingHorizontal: vw(5),
+    rowGap: vh(1.5),
+  },
+  btnMain: {
+    backgroundColor: '#FFED4B',
+    padding: vw(3),
+    borderRadius: 16,
+    alignItems: 'center',
+  },
+  btnMaintxt: {
+    color: 'black',
+    fontWeight: '600',
+  },
+  btnDisabled: {
+    backgroundColor: '#D3D3D3',
   },
 });
