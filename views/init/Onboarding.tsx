@@ -1,6 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  FlatList,
   Image,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
   ScrollView,
   StyleSheet,
   Text,
@@ -38,10 +41,20 @@ const Onboarding = () => {
 
 const MainLayout: React.FC = () => {
   const [renderData, setRenderData] = useState<InitPageProps>(InitPageData[0]);
+  const [currentPage, setCurrentPage] = useState(0);
+  console.log('currentPage', currentPage);
 
   useEffect(() => {
     setRenderData(InitPageData[0]);
   }, []);
+
+  const handleMomentumScrollEnd = (
+    event: NativeSyntheticEvent<NativeScrollEvent>,
+  ) => {
+    const offsetX = event.nativeEvent.contentOffset.x;
+    const pageIndex = Math.round(offsetX / vw(90)); // Divide by the width of each page
+    setCurrentPage(pageIndex);
+  };
 
   return (
     <View style={{paddingVertical: vh(2), flex: 1}}>
@@ -52,8 +65,29 @@ const MainLayout: React.FC = () => {
         <Image style={styles.mainImg} source={renderData.img} />
       </View>
       <View style={styles.lowerView}>
-        <Text style={styles.lowerTitle}>{renderData.title}</Text>
-        <Text style={styles.lowerdescription}>{renderData.description}</Text>
+        <FlatList
+          data={InitPageData}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          snapToAlignment="center"
+          keyExtractor={(item, index) => index.toString()}
+          onMomentumScrollEnd={handleMomentumScrollEnd}
+          renderItem={({item}) => (
+            <View style={{width: vw(90), rowGap: vh(2)}}>
+              <Text style={styles.lowerTitle}>{item.title}</Text>
+              <Text style={styles.lowerdescription}>{item.description}</Text>
+            </View>
+          )}
+        />
+        <View style={styles.pagination}>
+          {InitPageData.map((_, index) => (
+            <View
+              key={index}
+              style={[styles.dot, currentPage === index && styles.activeDot]}
+            />
+          ))}
+        </View>
       </View>
     </View>
   );
@@ -114,5 +148,20 @@ const styles = StyleSheet.create({
   lowerdescription: {
     textAlign: 'center',
     color: '#76787E',
+  },
+  pagination: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: vh(2),
+    alignSelf: 'center',
+  },
+  dot: {
+    width: vw(10),
+    height: vh(1),
+    backgroundColor: '#76787E',
+    borderRadius: vw(20),
+  },
+  activeDot: {
+    backgroundColor: '#FFED4B',
   },
 });
