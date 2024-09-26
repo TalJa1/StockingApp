@@ -18,6 +18,8 @@ import {
   stocklineIcon,
 } from '../../assets/svgXML';
 import {SignUpInputFieldProps} from '../../services/typeProps';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const SignUp = () => {
   useStatusBar('#1A1A1A');
@@ -33,9 +35,9 @@ const SignUp = () => {
 };
 
 const FooterView: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const handleLoginPress = () => {
-    // Handle the login press event
-    console.log('Đăng nhập pressed');
+    navigation.navigate('Login');
   };
 
   return (
