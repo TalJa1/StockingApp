@@ -22,6 +22,12 @@ import {
 import {SignUpInputFieldProps} from '../../services/typeProps';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {
+  GoogleSignin,
+  isErrorWithCode,
+  isSuccessResponse,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const Login = () => {
   useStatusBar('#1A1A1A');
@@ -148,6 +154,38 @@ const FooterView: React.FC = () => {
     navigation.navigate('SignUp');
   };
 
+  GoogleSignin.configure();
+
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      if (isSuccessResponse(response)) {
+        // setState({ userInfo: response.data });
+        console.log(response.data);
+      } else {
+        // sign in was cancelled by user
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (isErrorWithCode(error)) {
+        switch (error.code) {
+          case statusCodes.IN_PROGRESS:
+            // operation (eg. sign in) already in progress
+            break;
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            // Android only, play services not available or outdated
+            break;
+          default:
+          // some other error happened
+        }
+      } else {
+        // an error that's not related to google sign in occurred
+      }
+    }
+  };
+
   return (
     <View style={styles.footerContainer}>
       <View style={styles.lineContainer}>
@@ -156,7 +194,12 @@ const FooterView: React.FC = () => {
         <View style={styles.line} />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            console.log('Google');
+            signIn();
+          }}>
           <View style={styles.txtIconGrp}>
             {goggleIcon(vw(5), vw(5))}
             <Text style={styles.buttonText}>Google</Text>

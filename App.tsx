@@ -123,7 +123,7 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* Main || Onboarding */}
-      <Stack.Navigator initialRouteName="PhoneVerify">
+      <Stack.Navigator initialRouteName="Onboarding">
         <Stack.Screen
           name="Main"
           component={TabNavigator}
