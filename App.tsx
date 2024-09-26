@@ -21,6 +21,7 @@ import Profile from './views/bottomNavigator/Profile';
 import Onboarding from './views/init/Onboarding';
 import SignUp from './views/account/SignUp';
 import Login from './views/account/Login';
+import PhoneInput from './views/init/PhoneInput';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -122,12 +123,13 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* Main || Onboarding */}
-      <Stack.Navigator initialRouteName="Onboarding">
+      <Stack.Navigator initialRouteName="PhoneInput">
         <Stack.Screen
           name="Main"
           component={TabNavigator}
           options={{headerShown: false}}
         />
+        {/* Init */}
         <Stack.Screen
           name="Onboarding"
           component={Onboarding}
@@ -143,6 +145,12 @@ const App = () => {
           component={Login}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="PhoneInput"
+          component={PhoneInput}
+          options={{headerShown: false}}
+        />
+        {/* End Init */}
       </Stack.Navigator>
     </NavigationContainer>
   );
