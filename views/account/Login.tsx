@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -24,9 +25,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
   GoogleSignin,
-  isErrorWithCode,
   isSuccessResponse,
-  statusCodes,
 } from '@react-native-google-signin/google-signin';
 
 const Login = () => {
@@ -162,27 +161,22 @@ const FooterView: React.FC = () => {
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
         // setState({ userInfo: response.data });
-        console.log(response.data);
+        navigation.navigate('Welcome');
       } else {
         // sign in was cancelled by user
       }
     } catch (error) {
-      console.log(error);
+      Alert.alert('Logged in failed');
+    }
+  };
 
-      if (isErrorWithCode(error)) {
-        switch (error.code) {
-          case statusCodes.IN_PROGRESS:
-            // operation (eg. sign in) already in progress
-            break;
-          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-            // Android only, play services not available or outdated
-            break;
-          default:
-          // some other error happened
-        }
-      } else {
-        // an error that's not related to google sign in occurred
-      }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const signOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+      // setState({user: null});
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -197,8 +191,8 @@ const FooterView: React.FC = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            console.log('Google');
             signIn();
+            // signOut();
           }}>
           <View style={styles.txtIconGrp}>
             {goggleIcon(vw(5), vw(5))}

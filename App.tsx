@@ -22,6 +22,7 @@ import Onboarding from './views/init/Onboarding';
 import SignUp from './views/account/SignUp';
 import Login from './views/account/Login';
 import PhoneVerify from './views/init/PhoneVerify';
+import Welcome from './views/init/Welcome';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -148,6 +149,11 @@ const App = () => {
         <Stack.Screen
           name="PhoneVerify"
           component={PhoneVerify}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
           options={{headerShown: false}}
         />
         {/* End Init */}
