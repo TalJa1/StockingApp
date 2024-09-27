@@ -23,24 +23,26 @@ const Home = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Header />
         <InforView />
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{columnGap: vw(3), paddingVertical: vh(2)}}>
-          {stockData1.map((item, index) => {
-            return (
-              <View key={index}>
-                <RenderStockData1
-                  name={item.name}
-                  logo={item.logo}
-                  shortName={item.shortName}
-                  isIncrease={item.isIncrease}
-                  value={item.value}
-                />
-              </View>
-            );
-          })}
-        </ScrollView>
+        <View>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{columnGap: vw(3), paddingVertical: vh(2)}}>
+            {stockData1.map((item, index) => {
+              return (
+                <View key={index}>
+                  <RenderStockData1
+                    name={item.name}
+                    logo={item.logo}
+                    shortName={item.shortName}
+                    isIncrease={item.isIncrease}
+                    value={item.value}
+                  />
+                </View>
+              );
+            })}
+          </ScrollView>
+        </View>
         <FollowView />
       </ScrollView>
     </SafeAreaView>
@@ -50,8 +52,8 @@ const Home = () => {
 const FollowView: React.FC = () => {
   return (
     <View>
-      <View>
-        <Text>Following</Text>
+      <View style={styles.followHeader}>
+        <Text style={styles.followHeaderTxT}>Theo dõi</Text>
         {addIcon(vw(7), vw(7))}
       </View>
     </View>
@@ -208,5 +210,15 @@ const styles = StyleSheet.create({
   decreaseText: {
     color: '#FF0000',
     marginLeft: 5,
+  },
+  followHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  followHeaderTxT: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
   },
 });

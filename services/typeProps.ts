@@ -17,3 +17,12 @@ export interface StockHomeData1Interface {
   isIncrease: boolean;
   value: number;
 }
+
+export interface StockData {
+  logo: any;
+  name: string;
+  shortName: string;
+  isIncrease: boolean;
+  value: number;
+  chart: any;
+}

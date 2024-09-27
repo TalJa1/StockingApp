@@ -56,3 +56,22 @@ export const stockHomeData1 = [
     value: 0.78,
   },
 ];
+
+export const stockHomeData2 = [
+  {
+    logo: require('../assets/home/amazon.png'),
+    name: 'Amazon, Inc.',
+    shortName: 'AMZN',
+    isIncrease: false,
+    value: 0.12,
+    chart: require('../assets/home/amazonchart.png'),
+  },
+  {
+    logo: require('../assets/home/adobe.png'),
+    name: 'Adobe Inc.',
+    shortName: 'ADBE',
+    isIncrease: true,
+    value: 0.32,
+    chart: require('../assets/home/adobechart.png'),
+  },
+];
