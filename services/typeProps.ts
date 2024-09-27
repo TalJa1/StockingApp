@@ -26,3 +26,13 @@ export interface StockHomeData2Interface {
   value: number;
   chart: any;
 }
+
+export interface StockHomeData3Interface {
+  logo: any;
+  name: string;
+  shortName: string;
+  isIncrease: boolean;
+  value: number;
+  chart: any;
+  amount: string;
+}

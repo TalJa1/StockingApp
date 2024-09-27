@@ -75,3 +75,33 @@ export const stockHomeData2 = [
     chart: require('../assets/home/adobechart.png'),
   },
 ];
+
+export const StockHomeData3 = [
+  {
+    logo: require('../assets/home/apple.png'),
+    name: 'Apple Inc.',
+    shortName: 'AAPL',
+    isIncrease: true,
+    value: 0.12,
+    chart: require('../assets/home/chart2.png'),
+    amount: '142.26',
+  },
+  {
+    logo: require('../assets/home/netflix.png'),
+    name: 'Netflix Inc.',
+    shortName: 'NFLX',
+    isIncrease: true,
+    value: 2.1,
+    chart: require('../assets/home/chart3.png'),
+    amount: '722.26',
+  },
+  {
+    logo: require('../assets/home/facebook.png'),
+    name: 'Facebook Inc.',
+    shortName: 'FB',
+    isIncrease: true,
+    value: 1.2,
+    chart: require('../assets/home/chart4.png'),
+    amount: '343.6',
+  },
+];

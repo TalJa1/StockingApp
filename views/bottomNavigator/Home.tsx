@@ -47,8 +47,17 @@ const Home = () => {
           </ScrollView>
         </View>
         <FollowView />
+        <StockView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const StockView: React.FC = () => {
+  return (
+    <View style={styles.stockViewContainer}>
+      <Text style={styles.followHeaderTxT}>Cổ phiếu</Text>
+    </View>
   );
 };
 
@@ -293,5 +302,8 @@ const styles = StyleSheet.create({
   chart: {
     width: 60,
     height: 30,
+  },
+  stockViewContainer: {
+    paddingVertical: vh(2),
   },
 });
