@@ -18,7 +18,7 @@ export interface StockHomeData1Interface {
   value: number;
 }
 
-export interface StockData {
+export interface StockHomeData2Interface {
   logo: any;
   name: string;
   shortName: string;

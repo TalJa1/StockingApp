@@ -12,8 +12,11 @@ import useStatusBar from '../../services/useStatusBar';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {addIcon, notiIcon, stocklineIcon, viewIcon} from '../../assets/svgXML';
-import {StockHomeData1Interface} from '../../services/typeProps';
-import {stockHomeData1} from '../../services/renderData';
+import {
+  StockHomeData1Interface,
+  StockHomeData2Interface,
+} from '../../services/typeProps';
+import {stockHomeData1, stockHomeData2} from '../../services/renderData';
 
 const Home = () => {
   useStatusBar('#1A1A1A');
@@ -50,11 +53,60 @@ const Home = () => {
 };
 
 const FollowView: React.FC = () => {
+  const stockData2: StockHomeData2Interface[] = stockHomeData2;
   return (
     <View>
       <View style={styles.followHeader}>
         <Text style={styles.followHeaderTxT}>Theo dõi</Text>
         {addIcon(vw(7), vw(7))}
+      </View>
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{columnGap: vw(2)}}>
+          {stockData2.map((item, index) => {
+            return (
+              <View
+                key={index}
+                style={[styles.stockContainer, {backgroundColor: '#2C2C2C'}]}>
+                <View style={styles.topRow}>
+                  {item.logo ? (
+                    <Image source={item.logo} style={styles.logo} />
+                  ) : (
+                    <View style={styles.circle}>
+                      <Text style={styles.circleText}>
+                        {item.shortName.charAt(0)}
+                      </Text>
+                    </View>
+                  )}
+                  <View style={styles.column}>
+                    <Text style={styles.nameText}>{item.name}</Text>
+                    <Text style={styles.shortNameText}>{item.shortName}</Text>
+                  </View>
+                </View>
+                <View style={styles.bottomRow}>
+                  <Text
+                    style={[
+                      styles.valueText,
+                      {color: item.isIncrease ? '#00FF00' : '#FF0000'},
+                    ]}>
+                    {item.isIncrease ? '+' : '-'}
+                    {item.value}%
+                  </Text>
+                  <Image
+                    source={item.chart}
+                    style={{
+                      width: vw(40),
+                      height: vw(20),
+                      resizeMode: 'cover',
+                    }}
+                  />
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
       </View>
     </View>
   );
@@ -215,10 +267,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: vh(1),
   },
   followHeaderTxT: {
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+  },
+  stockContainer: {
+    width: vw(80),
+    padding: 10,
+    backgroundColor: '#1A1A1A',
+    borderRadius: 10,
+  },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  chart: {
+    width: 60,
+    height: 30,
   },
 });
