@@ -16,7 +16,11 @@ import {
   StockHomeData1Interface,
   StockHomeData2Interface,
 } from '../../services/typeProps';
-import {stockHomeData1, stockHomeData2} from '../../services/renderData';
+import {
+  stockHomeData1,
+  stockHomeData2,
+  StockHomeData3,
+} from '../../services/renderData';
 
 const Home = () => {
   useStatusBar('#1A1A1A');
@@ -57,6 +61,28 @@ const StockView: React.FC = () => {
   return (
     <View style={styles.stockViewContainer}>
       <Text style={styles.followHeaderTxT}>Cổ phiếu</Text>
+      <View>
+        {StockHomeData3.map((item, index) => {
+          return (
+            <View style={styles.stock3Container} key={index}>
+              <View style={{flexDirection: 'row', columnGap: vw(2)}}>
+                <Image source={item.logo} />
+                <View>
+                  <Text style={styles.stock3Title}>{item.shortName}</Text>
+                  <Text style={styles.stock3Sub}>{item.name}</Text>
+                </View>
+              </View>
+              <Image source={item.chart} />
+              <View style={{alignItems: 'flex-end'}}>
+                <Text style={styles.stock3Title}>${item.amount}</Text>
+                <Text style={{color: '#5DC172', fontSize: 12}}>
+                  + {item.value}%
+                </Text>
+              </View>
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 };
@@ -198,7 +224,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: container,
-  scrollContainer: {flex: 1, paddingHorizontal: vw(5)},
+  scrollContainer: {flexGrow: 1, paddingHorizontal: vw(5)},
   headerContainer: {
     paddingVertical: vh(2),
     flexDirection: 'row',
@@ -305,5 +331,22 @@ const styles = StyleSheet.create({
   },
   stockViewContainer: {
     paddingVertical: vh(2),
+  },
+  stock3Container: {
+    width: '100%',
+    paddingVertical: vh(1.5),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  stock3Title: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  stock3Sub: {
+    color: '#76787E',
+    fontSize: 12,
+    fontWeight: '400',
   },
 });
