@@ -22,14 +22,14 @@ export const stockHomeData1 = [
   },
   {
     name: 'NASDAQ Composite',
-    logo: null,
+    logo: require('../assets/home/logoDOW.png'),
     shortName: 'NASDAQ',
     isIncrease: false,
     value: 0.34,
   },
   {
     name: 'Dow Jones Industrial Average',
-    logo: null,
+    logo: require('../assets/home/logoDOW.png'),
     shortName: 'DJIA',
     isIncrease: true,
     value: 0.45,

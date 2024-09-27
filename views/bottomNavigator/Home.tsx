@@ -11,7 +11,7 @@ import React, {useState} from 'react';
 import useStatusBar from '../../services/useStatusBar';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {notiIcon, stocklineIcon, viewIcon} from '../../assets/svgXML';
+import {addIcon, notiIcon, stocklineIcon, viewIcon} from '../../assets/svgXML';
 import {StockHomeData1Interface} from '../../services/typeProps';
 import {stockHomeData1} from '../../services/renderData';
 
@@ -23,7 +23,10 @@ const Home = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Header />
         <InforView />
-        <ScrollView horizontal>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{columnGap: vw(3), paddingVertical: vh(2)}}>
           {stockData1.map((item, index) => {
             return (
               <View key={index}>
@@ -38,8 +41,20 @@ const Home = () => {
             );
           })}
         </ScrollView>
+        <FollowView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const FollowView: React.FC = () => {
+  return (
+    <View>
+      <View>
+        <Text>Following</Text>
+        {addIcon(vw(7), vw(7))}
+      </View>
+    </View>
   );
 };
 
@@ -51,19 +66,27 @@ const RenderStockData1: React.FC<StockHomeData1Interface> = ({
   value,
 }) => {
   return (
-    <View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Text style={{color: '#FFFFFF'}}>{name}</Text>
-        <Text style={{color: '#76787E'}}>{shortName}</Text>
-      </View>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Image source={logo} />
-        <Text style={{color: '#FFFFFF'}}>{value}</Text>
-        {isIncrease ? (
-          <Text style={{color: '#00FF00'}}>▲</Text>
+    <View style={styles.stockContainer1}>
+      <View style={styles.row}>
+        {logo ? (
+          <Image source={logo} style={styles.logo} />
         ) : (
-          <Text style={{color: '#FF0000'}}>▼</Text>
+          <View style={styles.circle}>
+            <Text style={styles.circleText}>{shortName.charAt(0)}</Text>
+          </View>
         )}
+        <View style={styles.column}>
+          <Text style={styles.nameText}>{name}</Text>
+          <Text style={styles.shortNameText}>{shortName}</Text>
+        </View>
+        <Text
+          style={[
+            styles.valueText,
+            isIncrease ? styles.increaseText : styles.decreaseText,
+          ]}>
+          {isIncrease ? '+' : '-'}
+          {value}%
+        </Text>
       </View>
     </View>
   );
@@ -135,5 +158,55 @@ const styles = StyleSheet.create({
   },
   inforLabel: {
     color: '#76787E',
+  },
+  stockContainer1: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#FFED4B',
+    borderRadius: 5,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  column: {
+    flexDirection: 'column',
+    marginLeft: 10,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#2C2C2C',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleText: {
+    color: 'yellow',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  nameText: {
+    color: '#FFFFFF',
+  },
+  shortNameText: {
+    color: '#76787E',
+  },
+  valueText: {
+    color: '#FFFFFF',
+    marginLeft: 10,
+  },
+  increaseText: {
+    color: '#00FF00',
+    marginLeft: 5,
+  },
+  decreaseText: {
+    color: '#FF0000',
+    marginLeft: 5,
   },
 });
