@@ -12,7 +12,7 @@ export interface SignUpInputFieldProps {
 
 export interface StockHomeData1Interface {
   name: string;
-  logo: string | null;
+  logo: any;
   shortName: string;
   isIncrease: boolean;
   value: number;

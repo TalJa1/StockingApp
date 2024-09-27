@@ -15,7 +15,7 @@ export const InitPageData = [
 export const stockHomeData1 = [
   {
     name: 'Standard & Poor’s',
-    logo: null,
+    logo: require('../assets/home/logoSP.png'),
     shortName: 'S&P 500',
     isIncrease: true,
     value: 0.12,
