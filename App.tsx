@@ -124,7 +124,7 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* Main || Onboarding */}
-      <Stack.Navigator initialRouteName="Onboarding">
+      <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
           name="Main"
           component={TabNavigator}
