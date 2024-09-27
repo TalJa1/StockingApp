@@ -1,10 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
 import useStatusBar from '../../services/useStatusBar';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {notiIcon, stocklineIcon} from '../../assets/svgXML';
+import {notiIcon, stocklineIcon, viewIcon} from '../../assets/svgXML';
 
 const Home = () => {
   useStatusBar('#1A1A1A');
@@ -12,8 +19,35 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Header />
+        <InforView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const InforView: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <View style={styles.inforContainer}>
+      <View style={{rowGap: vh(1)}}>
+        <Text style={styles.inforLabel}>Tổng danh mục đầu tư</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {isVisible ? (
+            <Text style={styles.inforTxT}>$13,240.11 </Text>
+          ) : (
+            <Text style={styles.inforTxT}>$******* </Text>
+          )}
+          <TouchableOpacity
+            onPress={() => {
+              setIsVisible(!isVisible);
+            }}>
+            {viewIcon(vw(4), vw(4))}
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Image source={require('../../assets/home/chart1.png')} />
+    </View>
   );
 };
 
@@ -44,5 +78,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
     fontWeight: '600',
+  },
+  inforContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  inforTxT: {
+    fontSize: 22,
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  inforLabel: {
+    color: '#76787E',
   },
 });
