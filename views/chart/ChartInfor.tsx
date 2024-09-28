@@ -149,6 +149,7 @@ const DetailView: React.FC<{itemIndex: number}> = () => (
         </View>
       </View>
       <BarChart
+        isAnimated
         data={barData}
         barWidth={20}
         spacing={40}
@@ -169,6 +170,7 @@ const ChartView: React.FC = () => {
     <View style={[centerAll, {marginVertical: vh(2)}]}>
       <View style={{width: vw(90), overflow: 'hidden'}}>
         <BarChart
+          isAnimated
           data={ChartInforPageData}
           barWidth={8}
           initialSpacing={30}

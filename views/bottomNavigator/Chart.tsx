@@ -80,6 +80,7 @@ const ChartView: React.FC = () => {
     <View style={centerAll}>
       <View style={{width: vw(90), overflow: 'hidden'}}>
         <BarChart
+          isAnimated
           data={ChartPageData}
           barWidth={8}
           initialSpacing={10}
