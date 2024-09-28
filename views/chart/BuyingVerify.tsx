@@ -39,14 +39,10 @@ const BuyingVerify = () => {
 };
 
 const PayMethod: React.FC = () => {
-  const [selectedMethods, setSelectedMethods] = useState<boolean[]>(
-    Array(PayMethodData.length).fill(false),
-  );
+  const [selectedMethod, setSelectedMethod] = useState<number | null>(null);
 
-  const toggleCheckbox = (index: number) => {
-    const updatedMethods = [...selectedMethods];
-    updatedMethods[index] = !updatedMethods[index];
-    setSelectedMethods(updatedMethods);
+  const selectRadioButton = (index: number) => {
+    setSelectedMethod(index);
   };
   return (
     <View style={{paddingHorizontal: vw(5), marginVertical: vh(2)}}>
@@ -71,12 +67,29 @@ const PayMethod: React.FC = () => {
             </View>
             <TouchableOpacity
               style={styles.checkbox}
-              onPress={() => toggleCheckbox(index)}>
-              {selectedMethods[index] && <View style={styles.checkboxInner} />}
+              onPress={() => selectRadioButton(index)}>
+              {selectedMethod === index && (
+                <View style={styles.checkboxInner} />
+              )}
             </TouchableOpacity>
           </View>
         );
       })}
+      <TouchableOpacity
+        style={[
+          {
+            backgroundColor: '#FFED4B',
+            paddingHorizontal: vw(5),
+            paddingVertical: vh(2),
+            borderRadius: 16,
+            marginTop: vh(2),
+          },
+          centerAll,
+        ]}>
+        <Text style={{color: '#1A1A1A', fontSize: 14, fontWeight: '600'}}>
+          Đặt lệnh
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
