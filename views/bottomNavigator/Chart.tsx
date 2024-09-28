@@ -1,11 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
 import {increasingCircleIcon} from '../../assets/svgXML';
-import {ChartPageData, StatusInforChartData} from '../../services/renderData';
+import {
+  ChartPageData,
+  StatusInforChartData,
+  StockHomeData3,
+} from '../../services/renderData';
 import {InforStatusViewProps} from '../../services/typeProps';
 import {BarChart} from 'react-native-gifted-charts/dist/BarChart';
 
@@ -17,8 +21,39 @@ const Chart = () => {
         <Header />
         <InforView />
         <ChartView />
+        <StockView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const StockView: React.FC = () => {
+  return (
+    <View style={styles.stockViewContainer}>
+      <Text style={styles.followHeaderTxT}>Cổ phiếu</Text>
+      <View>
+        {StockHomeData3.map((item, index) => {
+          return (
+            <TouchableOpacity style={styles.stock3Container} key={index}>
+              <View style={{flexDirection: 'row', columnGap: vw(2)}}>
+                <Image source={item.logo} />
+                <View>
+                  <Text style={styles.stock3Title}>{item.shortName}</Text>
+                  <Text style={styles.stock3Sub}>{item.name}</Text>
+                </View>
+              </View>
+              <Image source={item.chart} />
+              <View style={{alignItems: 'flex-end'}}>
+                <Text style={styles.stock3Title}>${item.amount}</Text>
+                <Text style={{color: '#5DC172', fontSize: 12}}>
+                  + {item.value}%
+                </Text>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </View>
   );
 };
 
@@ -176,5 +211,36 @@ const styles = StyleSheet.create({
   amountText: {
     color: '#FFFFFF',
     fontWeight: 'bold',
+  },
+  stockTxt: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 18,
+  },
+  stockViewContainer: {
+    paddingHorizontal: vw(5),
+    paddingVertical: vh(2),
+  },
+  followHeaderTxT: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  stock3Container: {
+    width: '100%',
+    paddingVertical: vh(1.5),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  stock3Title: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  stock3Sub: {
+    color: '#76787E',
+    fontSize: 12,
+    fontWeight: '400',
   },
 });
