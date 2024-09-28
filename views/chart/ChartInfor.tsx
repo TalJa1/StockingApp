@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
@@ -28,10 +28,58 @@ const ChartInfor = () => {
         <Header />
         <BannerView itemIndex={itemIndex} />
         <ChartView />
+        <TabView />
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const TabView: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('introduce');
+
+  return (
+    <View style={styles.container1}>
+      <View style={styles.tabContainer}>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'introduce' && styles.activeTab]}
+          onPress={() => setActiveTab('introduce')}>
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === 'introduce' && {color: 'black'},
+            ]}>
+            Giới thiệu
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'detail' && styles.activeTab]}
+          onPress={() => setActiveTab('detail')}>
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === 'detail' && {color: 'black'},
+            ]}>
+            Chi tiết
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {activeTab === 'introduce' && <IntroduceView />}
+      {activeTab === 'detail' && <DetailView />}
+    </View>
+  );
+};
+
+const IntroduceView: React.FC = () => (
+  <View style={styles.scene}>
+    <Text style={styles.text}>Giới thiệu Content</Text>
+  </View>
+);
+
+const DetailView: React.FC = () => (
+  <View style={styles.scene}>
+    <Text style={styles.text}>Chi tiết Content</Text>
+  </View>
+);
 
 const ChartView: React.FC = () => {
   return (
@@ -197,5 +245,42 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+  },
+  container1: {
+    flex: 1,
+    paddingHorizontal: vw(5),
+    marginVertical: vh(2),
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#2C2C2C',
+    borderRadius: 12,
+    padding: 4,
+  },
+  tab: {
+    padding: 16,
+    width: '50%',
+  },
+  activeTab: {
+    backgroundColor: '#FFED4B',
+    borderRadius: 12,
+  },
+  tabText: {
+    color: '#76787E',
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: '600',
+  },
+  scene: {
+    paddingVertical: vh(2),
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  text: {
+    color: '#FFFFFF',
+    fontSize: 18,
   },
 });

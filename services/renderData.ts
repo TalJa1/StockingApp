@@ -283,3 +283,33 @@ export const ChartInforPageData = [
     gradientColor: '#2C2C2C',
   },
 ];
+
+export const IntroduceCompanyData = [
+  {
+    website: 'netflix.com',
+    employees: 13000,
+    foundingData: '29 thg 8, 1997',
+    headquarters: 'Los Gatos, California, Hoa Kỳ',
+    ceo: 'Reed Hastings',
+    briefDescription:
+      'Netflix, Inc. là một công ty giải trí truyền phát trực tuyến Mỹ được thành lập vào năm 1997 bởi Reed Hastings và Marc Randolph. Trụ sở chính của công ty đặt tại Los Gatos, California. Netflix là một trong những dịch vụ truyền phát trực tuyến lớn nhất trên thế giới với hơn 200 triệu người dùng trên toàn thế giới.',
+  },
+  {
+    website: 'apple.com',
+    employees: 147000,
+    foundingData: '1 thg 4, 1976',
+    headquarters: 'Cupertino, California, Hoa Kỳ',
+    ceo: 'Tim Cook',
+    briefDescription:
+      'Apple Inc. là một công ty công nghệ đa quốc gia của Mỹ được thành lập vào năm 1976 bởi Steve Jobs, Steve Wozniak và Ronald Wayne. Trụ sở chính của công ty đặt tại Cupertino, California. Apple là một trong những công ty công nghệ lớn nhất trên thế giới, nổi tiếng với các sản phẩm như iPhone, iPad, MacBook và Apple Watch.',
+  },
+  {
+    website: 'facebook.com',
+    employees: 58600,
+    foundingData: '4 thg 2, 2004',
+    headquarters: 'Menlo Park, California, Hoa Kỳ',
+    ceo: 'Mark Zuckerberg',
+    briefDescription:
+      'Facebook, Inc. là một công ty truyền thông xã hội và công nghệ của Mỹ được thành lập vào năm 2004 bởi Mark Zuckerberg cùng với Eduardo Saverin, Andrew McCollum, Dustin Moskovitz và Chris Hughes. Trụ sở chính của công ty đặt tại Menlo Park, California. Facebook là một trong những mạng xã hội lớn nhất trên thế giới với hơn 2.8 tỷ người dùng hàng tháng.',
+  },
+];
