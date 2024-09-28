@@ -34,6 +34,11 @@ const ChartInfor = () => {
         <BannerView itemIndex={itemIndex} />
         <ChartView />
         <TabView itemIndex={itemIndex} />
+        <View style={{paddingHorizontal: vw(5)}}>
+          <TouchableOpacity style={styles.buyBtn}>
+            <Text style={{color: '#1A1A1A', fontWeight: '600'}}>Mua</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -402,5 +407,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#FFED4B',
     marginRight: 5,
+  },
+  buyBtn: {
+    backgroundColor: '#FFED4B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: vh(4),
+    borderRadius: 16,
+    paddingVertical: vh(2),
   },
 });
