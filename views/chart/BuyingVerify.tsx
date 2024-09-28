@@ -7,11 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {StockHomeData3, VerifyData} from '../../services/renderData';
+import {
+  PayMethodData,
+  StockHomeData3,
+  VerifyData,
+} from '../../services/renderData';
 import {backIcon} from '../../assets/svgXML';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -28,8 +32,52 @@ const BuyingVerify = () => {
         <View style={{paddingHorizontal: vw(5)}}>
           <BannerView itemIndex={dataIndex} />
         </View>
+        <PayMethod />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const PayMethod: React.FC = () => {
+  const [selectedMethods, setSelectedMethods] = useState<boolean[]>(
+    Array(PayMethodData.length).fill(false),
+  );
+
+  const toggleCheckbox = (index: number) => {
+    const updatedMethods = [...selectedMethods];
+    updatedMethods[index] = !updatedMethods[index];
+    setSelectedMethods(updatedMethods);
+  };
+  return (
+    <View style={{paddingHorizontal: vw(5), marginVertical: vh(2)}}>
+      <Text
+        style={{
+          color: '#FFFFFF',
+          fontSize: 18,
+          fontWeight: '600',
+          marginBottom: vh(2),
+        }}>
+        Phương thức thanh toán
+      </Text>
+      {PayMethodData.map((item, index) => {
+        return (
+          <View style={styles.cardContainer} key={index}>
+            <View style={styles.cardContainer1}>
+              <View style={styles.cardIcon}>{item.icon}</View>
+              <View>
+                <Text style={styles.whiteTxt}>{item.title}</Text>
+                <Text style={styles.greyTxt}>{item.description}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              style={styles.checkbox}
+              onPress={() => toggleCheckbox(index)}>
+              {selectedMethods[index] && <View style={styles.checkboxInner} />}
+            </TouchableOpacity>
+          </View>
+        );
+      })}
+    </View>
   );
 };
 
@@ -190,5 +238,43 @@ const styles = StyleSheet.create({
     width: '50%',
     fontWeight: '600',
     textAlign: 'right',
+  },
+  cardContainer: {
+    backgroundColor: '#2C2C2C',
+    padding: vw(3),
+    borderRadius: 10,
+    marginBottom: vh(2),
+    flexDirection: 'row',
+    columnGap: vw(2),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cardContainer1: {
+    flexDirection: 'row',
+    columnGap: vw(2),
+    alignItems: 'center',
+  },
+  cardIcon: {
+    padding: vw(2),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFED4B',
+    borderRadius: vw(20),
+    alignSelf: 'flex-start',
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: '#76787E',
+    borderRadius: vw(20),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkboxInner: {
+    width: 20,
+    height: 20,
+    borderRadius: vw(12),
+    backgroundColor: '#FFFFFF',
   },
 });

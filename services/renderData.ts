@@ -1,4 +1,9 @@
-import {arrowDownIcon, arrowUpIcon} from '../assets/svgXML';
+import {
+  appleOnlyIcon,
+  arrowDownIcon,
+  arrowUpIcon,
+  cardIcon,
+} from '../assets/svgXML';
 import {vw} from './styleSheet';
 
 export const InitPageData = [
@@ -389,5 +394,18 @@ export const VerifyData = [
       parseFloat('2.00') +
       parseFloat('3.00')
     ).toFixed(2),
+  },
+];
+
+export const PayMethodData = [
+  {
+    icon: cardIcon(vw(8), vw(8)),
+    title: 'Thẻ tín dụng',
+    description: 'Liên kết trực tiếp tới thẻ tín dụng',
+  },
+  {
+    icon: appleOnlyIcon(vw(8), vw(8)),
+    title: 'Apple pay',
+    description: 'Liên kết với tài khoản Apple',
   },
 ];

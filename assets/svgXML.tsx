@@ -11,6 +11,25 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const appleOnlyIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.0492 6.99998C6.88302 6.99998 5.82764 9.99998 5.82764 12.5C5.82764 15.5 7.93841 20 10.0492 20C11.1974 19.954 11.8212 19.5 13.2153 19.5C14.6 19.5 14.7984 20 16.3815 20C17.9646 20 20.603 17 20.603 15C20.5735 14.99 17.9941 14.597 17.9646 12C17.9445 9.82998 20.5144 9.04598 20.603 8.99998C19.5234 7.50798 17.4886 7.03698 16.9092 6.99998C15.3968 6.88898 13.9224 7.99998 13.2153 7.99998C12.4977 7.99998 11.2101 6.99998 10.0492 6.99998Z" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.2153 4C13.7751 4 14.312 3.78929 14.7079 3.41421C15.1037 3.03914 15.3261 2.53043 15.3261 2C14.7663 2 14.2294 2.21071 13.8336 2.58579C13.4377 2.96086 13.2153 3.46957 13.2153 4Z" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
+export const cardIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.7168 10H22.7137M7.93834 15H7.94889M12.1599 15H14.2706M6.88295 5H19.5476C21.2962 5 22.7137 6.34315 22.7137 8V16C22.7137 17.6569 21.2962 19 19.5476 19H6.88295C5.13433 19 3.7168 17.6569 3.7168 16V8C3.7168 6.34315 5.13433 5 6.88295 5Z" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const arrowDownIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 15.8334L10 4.16671M10 15.8334L5 10.8334M10 15.8334L15 10.8334" stroke="#C6413A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
