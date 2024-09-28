@@ -1,8 +1,13 @@
 import {
+  accountIcon,
   appleOnlyIcon,
   arrowDownIcon,
   arrowUpIcon,
+  billIcon,
   cardIcon,
+  languageIcon,
+  questionIcon,
+  securityIcon,
 } from '../assets/svgXML';
 import {vw} from './styleSheet';
 
@@ -407,5 +412,32 @@ export const PayMethodData = [
     icon: appleOnlyIcon(vw(8), vw(8)),
     title: 'Apple pay',
     description: 'Liên kết với tài khoản Apple',
+  },
+];
+
+export const ProfileRenderView = [
+  {
+    label: 'Tài khoản',
+    icon: accountIcon(vw(8), vw(8)),
+  },
+  {
+    label: 'Bảo mật',
+    icon: securityIcon(vw(8), vw(8)),
+  },
+  {
+    label: 'Hóa đơn/Giao dịch',
+    icon: billIcon(vw(8), vw(8)),
+  },
+  {
+    label: 'Ngôn ngữ',
+    icon: languageIcon(vw(8), vw(8)),
+  },
+  {
+    label: 'Cài đặt',
+    icon: languageIcon(vw(8), vw(8)),
+  },
+  {
+    label: 'Câu hỏi thường gặp',
+    icon: questionIcon(vw(8), vw(8)),
   },
 ];
