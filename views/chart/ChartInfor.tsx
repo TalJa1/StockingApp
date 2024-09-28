@@ -26,6 +26,7 @@ const ChartInfor = () => {
   useStatusBar('#1A1A1A');
   const route = useRoute();
   const {itemIndex} = route.params as {itemIndex: number};
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,7 +36,11 @@ const ChartInfor = () => {
         <ChartView />
         <TabView itemIndex={itemIndex} />
         <View style={{paddingHorizontal: vw(5)}}>
-          <TouchableOpacity style={styles.buyBtn}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('BuyingVerify', {dataIndex: itemIndex});
+            }}
+            style={styles.buyBtn}>
             <Text style={{color: '#1A1A1A', fontWeight: '600'}}>Mua</Text>
           </TouchableOpacity>
         </View>
