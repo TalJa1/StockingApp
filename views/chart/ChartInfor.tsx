@@ -25,26 +25,55 @@ const ChartInfor = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Header />
-        <View style={styles.stockContainer}>
-          <View style={styles.stock3Container}>
-            <View style={styles.stockContent}>
-              <View style={styles.stockContent1}>
-                <Image source={StockHomeData3[itemIndex].logo} />
-                <View>
-                  <Text style={styles.stock3Title}>
-                    {StockHomeData3[itemIndex].shortName}
-                  </Text>
-                  <Text style={styles.stock3Sub}>
-                    {StockHomeData3[itemIndex].name}
-                  </Text>
-                </View>
-              </View>
-              {notiIcon(vw(5), vw(5), 'black')}
-            </View>
-          </View>
-        </View>
+        <BannerView itemIndex={itemIndex} />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const BannerView: React.FC<{itemIndex: number}> = ({itemIndex}) => {
+  const amount = parseFloat(StockHomeData3[itemIndex].amount);
+  const newAmount = amount + amount * 0.0014;
+  return (
+    <View style={styles.stockContainer}>
+      <View style={styles.stock3Container}>
+        <View style={styles.stockContent}>
+          <View style={styles.stockContent1}>
+            <Image source={StockHomeData3[itemIndex].logo} />
+            <View>
+              <Text style={styles.stock3Title}>
+                {StockHomeData3[itemIndex].shortName}
+              </Text>
+              <Text style={styles.stock3Sub}>
+                {StockHomeData3[itemIndex].name}
+              </Text>
+            </View>
+          </View>
+          {notiIcon(vw(5), vw(5), 'black')}
+        </View>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          paddingHorizontal: vw(3),
+        }}>
+        <View>
+          <Text style={styles.whiteTxt}>
+            ${StockHomeData3[itemIndex].amount}
+          </Text>
+          <Text>
+            <Text style={styles.yellowTxt}>++33,82</Text>{' '}
+            <Text style={styles.greenTxt}>(+4,91%%)</Text>{' '}
+            <Text style={styles.greyTxt}>Tháng trước</Text>
+          </Text>
+        </View>
+        <View style={{alignItems: 'flex-end'}}>
+          <Text style={styles.whiteTxt}>${newAmount.toFixed(2)}</Text>
+          <Text style={styles.yellowTxt}>+0,14 (+0,030%)</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 
@@ -79,6 +108,7 @@ const styles = StyleSheet.create({
   },
   stockContainer: {
     paddingHorizontal: vw(5),
+    rowGap: vh(2),
   },
   stock3Container: {
     borderRadius: 6,
@@ -110,5 +140,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: vw(2),
     alignItems: 'center',
+  },
+  yellowTxt: {
+    color: '#FFED4B',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  greenTxt: {
+    color: '#5DC172',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  greyTxt: {
+    color: '#76787E',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  whiteTxt: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
