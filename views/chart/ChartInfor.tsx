@@ -105,6 +105,7 @@ const IntroduceView: React.FC<{itemIndex: number}> = ({itemIndex}) => {
     </View>
   );
 };
+
 const DetailView: React.FC<{itemIndex: number}> = () => (
   <View style={[styles.scene, {rowGap: vh(1)}]}>
     <View style={{width: '100%'}}>
@@ -149,17 +150,15 @@ const DetailView: React.FC<{itemIndex: number}> = () => (
       </View>
       <BarChart
         data={barData}
-        barWidth={8}
+        barWidth={20}
         spacing={40}
         roundedTop
-        roundedBottom
         hideYAxisText
         hideRules
         xAxisThickness={0}
         yAxisThickness={0}
         yAxisTextStyle={{color: 'gray'}}
         noOfSections={3}
-        maxValue={75}
       />
     </View>
   </View>
