@@ -13,10 +13,15 @@ const Profile = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Header />
+        <AccountRender />
         <Main />
       </ScrollView>
     </SafeAreaView>
   );
+};
+
+const AccountRender: React.FC = () => {
+  return <View></View>;
 };
 
 const Main: React.FC = () => {
