@@ -352,3 +352,42 @@ export const barData = [
   },
   {value: 25, frontColor: '#FFED4B'},
 ];
+
+export const VerifyData = [
+  {
+    sponsor: 'Stockup',
+    stockPriceEstimate: '141.65',
+    share: '3.00',
+    fee: '2.10',
+    defaultPrice: '100.00',
+    sum: (
+      parseFloat('141.65') +
+      parseFloat('3.00') +
+      parseFloat('2.10')
+    ).toFixed(2),
+  },
+  {
+    sponsor: 'Stockup',
+    stockPriceEstimate: '150.00',
+    share: '5.00',
+    fee: '1.50',
+    defaultPrice: '120.00',
+    sum: (
+      parseFloat('150.00') +
+      parseFloat('5.00') +
+      parseFloat('1.50')
+    ).toFixed(2),
+  },
+  {
+    sponsor: 'Stockup',
+    stockPriceEstimate: '200.00',
+    share: '2.00',
+    fee: '3.00',
+    defaultPrice: '180.00',
+    sum: (
+      parseFloat('200.00') +
+      parseFloat('2.00') +
+      parseFloat('3.00')
+    ).toFixed(2),
+  },
+];

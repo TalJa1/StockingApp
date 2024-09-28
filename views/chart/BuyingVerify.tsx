@@ -1,17 +1,106 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {container} from '../../services/styleSheet';
+import {centerAll, container, vh, vw} from '../../services/styleSheet';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {StockHomeData3, VerifyData} from '../../services/renderData';
+import {backIcon} from '../../assets/svgXML';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const BuyingVerify = () => {
+  const route = useRoute();
+  const {dataIndex} = route.params as {dataIndex: number};
+
+  console.log('dataIndex', dataIndex);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View>
-          <Text>BuyingVerify</Text>
+        <Header />
+        <View style={{paddingHorizontal: vw(5)}}>
+          <BannerView itemIndex={dataIndex} />
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const BannerView: React.FC<{itemIndex: number}> = ({itemIndex}) => {
+  const data = VerifyData[itemIndex];
+  return (
+    <View
+      style={{padding: vw(3), backgroundColor: '#2C2C2C', borderRadius: 10}}>
+      <View style={styles.stockContainer}>
+        <View style={styles.stock3Container}>
+          <View style={styles.stockContent}>
+            <View style={styles.stockContent1}>
+              <Image source={StockHomeData3[itemIndex].logo} />
+              <View>
+                <Text style={styles.stock3Title}>
+                  {StockHomeData3[itemIndex].shortName}
+                </Text>
+                <Text style={styles.stock3Sub}>
+                  {StockHomeData3[itemIndex].name}
+                </Text>
+              </View>
+            </View>
+            <Text style={{color: '#1A1A1A', fontWeight: '600'}}>
+              ${data.defaultPrice}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.infoContainer}>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoKey}>Nguồn tài trợ</Text>
+            <Text style={[styles.infoValue, {color: '#FFED4B'}]}>
+              {data.sponsor}
+            </Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoKey}>Ước tính giá cổ phiếu</Text>
+            <Text style={styles.infoValue}>${data.stockPriceEstimate}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoKey}>Khoảng lượt chia sẻ</Text>
+            <Text style={styles.infoValue}>{data.share}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoKey}>Phí</Text>
+            <Text style={styles.infoValue}>${data.fee}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoKey}>Tổng</Text>
+            <Text style={[styles.infoValue, {color: '#FFED4B'}]}>
+              ${data.sum}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const Header: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  return (
+    <View style={[centerAll, {paddingVertical: vh(3)}]}>
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        {backIcon(vw(6), vw(6), '#76787E')}
+      </TouchableOpacity>
+      <Text style={styles.headerTxt}>Xác nhận lệnh</Text>
+    </View>
   );
 };
 
@@ -19,4 +108,87 @@ export default BuyingVerify;
 
 const styles = StyleSheet.create({
   container: container,
+  headerTxt: {color: '#FFFFFF', fontSize: 14, fontWeight: '600'},
+  backBtn: {
+    position: 'absolute',
+    left: vw(5),
+    borderWidth: 1,
+    borderColor: '#76787E',
+    borderRadius: 10,
+    padding: vw(1.5),
+  },
+  stockContainer: {
+    rowGap: vh(2),
+  },
+  stock3Container: {
+    borderRadius: 6,
+    width: '100%',
+    backgroundColor: '#FFED4B',
+    paddingVertical: vh(1.5),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: vw(2),
+  },
+  stock3Title: {
+    color: '#1A1A1A',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  stock3Sub: {
+    color: '#76787E',
+    fontSize: 12,
+    fontWeight: '400',
+  },
+  stockContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  yellowTxt: {
+    color: '#FFED4B',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  greenTxt: {
+    color: '#5DC172',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  greyTxt: {
+    color: '#76787E',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  whiteTxt: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  stockContent1: {
+    flexDirection: 'row',
+    columnGap: vw(2),
+    alignItems: 'center',
+  },
+  infoContainer: {
+    width: '100%',
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  infoKey: {
+    color: 'white',
+    fontSize: 14,
+    width: '50%',
+  },
+  infoValue: {
+    color: '#76787E',
+    fontSize: 14,
+    width: '50%',
+    fontWeight: '600',
+    textAlign: 'right',
+  },
 });
