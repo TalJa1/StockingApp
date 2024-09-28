@@ -14,7 +14,11 @@ import useStatusBar from '../../services/useStatusBar';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {backIcon, notiIcon} from '../../assets/svgXML';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {ChartInforPageData, StockHomeData3} from '../../services/renderData';
+import {
+  ChartInforPageData,
+  IntroduceCompanyData,
+  StockHomeData3,
+} from '../../services/renderData';
 import {BarChart} from 'react-native-gifted-charts/dist/BarChart';
 
 const ChartInfor = () => {
@@ -28,13 +32,13 @@ const ChartInfor = () => {
         <Header />
         <BannerView itemIndex={itemIndex} />
         <ChartView />
-        <TabView />
+        <TabView itemIndex={itemIndex} />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const TabView: React.FC = () => {
+const TabView: React.FC<{itemIndex: number}> = ({itemIndex}) => {
   const [activeTab, setActiveTab] = useState('introduce');
 
   return (
@@ -63,19 +67,44 @@ const TabView: React.FC = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      {activeTab === 'introduce' && <IntroduceView />}
-      {activeTab === 'detail' && <DetailView />}
+      {activeTab === 'introduce' && <IntroduceView itemIndex={itemIndex} />}
+      {activeTab === 'detail' && <DetailView itemIndex={itemIndex} />}
     </View>
   );
 };
 
-const IntroduceView: React.FC = () => (
-  <View style={styles.scene}>
-    <Text style={styles.text}>Giới thiệu Content</Text>
-  </View>
-);
+const IntroduceView: React.FC<{itemIndex: number}> = ({itemIndex}) => {
+  const companyData = IntroduceCompanyData[itemIndex];
 
-const DetailView: React.FC = () => (
+  return (
+    <View style={styles.scene}>
+      <Text style={styles.text}>{companyData.briefDescription}</Text>
+      <View style={styles.infoContainer}>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoKey}>TRANG WEB:</Text>
+          <Text style={styles.infoValue}>{companyData.website}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoKey}>NHÂN VIÊN:</Text>
+          <Text style={styles.infoValue}>{companyData.employees}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoKey}>NGÀY THÀNH LẬP:</Text>
+          <Text style={styles.infoValue}>{companyData.foundingData}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoKey}>TRỤ SỞ CHÍNH:</Text>
+          <Text style={styles.infoValue}>{companyData.headquarters}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.infoKey}>GIÁM ĐỐC ĐIỀU HÀNH:</Text>
+          <Text style={styles.infoValue}>{companyData.ceo}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+const DetailView: React.FC<{itemIndex: number}> = () => (
   <View style={styles.scene}>
     <Text style={styles.text}>Chi tiết Content</Text>
   </View>
@@ -83,7 +112,7 @@ const DetailView: React.FC = () => (
 
 const ChartView: React.FC = () => {
   return (
-    <View style={centerAll}>
+    <View style={[centerAll, {marginVertical: vh(2)}]}>
       <View style={{width: vw(90), overflow: 'hidden'}}>
         <BarChart
           data={ChartInforPageData}
@@ -277,10 +306,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent',
+    paddingHorizontal: vw(3),
   },
   text: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  infoContainer: {
+    width: '100%',
+    marginVertical: vh(2),
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  infoKey: {
+    color: '#76787E',
+    fontSize: 14,
+    width: '50%',
+  },
+  infoValue: {
+    color: '#FFED4B',
+    fontSize: 14,
+    width: '50%',
+    textAlign: 'left',
   },
 });
