@@ -313,3 +313,42 @@ export const IntroduceCompanyData = [
       'Facebook, Inc. là một công ty truyền thông xã hội và công nghệ của Mỹ được thành lập vào năm 2004 bởi Mark Zuckerberg cùng với Eduardo Saverin, Andrew McCollum, Dustin Moskovitz và Chris Hughes. Trụ sở chính của công ty đặt tại Menlo Park, California. Facebook là một trong những mạng xã hội lớn nhất trên thế giới với hơn 2.8 tỷ người dùng hàng tháng.',
   },
 ];
+
+export const barData = [
+  {
+    value: 40,
+    label: '2020',
+    spacing: 2,
+    labelWidth: 30,
+    labelTextStyle: {color: 'gray'},
+    frontColor: '#7DC1F1',
+  },
+  {value: 20, frontColor: '#FFED4B'},
+  {
+    value: 50,
+    label: '2021',
+    spacing: 2,
+    labelWidth: 30,
+    labelTextStyle: {color: 'gray'},
+    frontColor: '#7DC1F1',
+  },
+  {value: 40, frontColor: '#FFED4B'},
+  {
+    value: 75,
+    label: '2022',
+    spacing: 2,
+    labelWidth: 30,
+    labelTextStyle: {color: 'gray'},
+    frontColor: '#7DC1F1',
+  },
+  {value: 25, frontColor: '#FFED4B'},
+  {
+    value: 75,
+    label: '2023',
+    spacing: 2,
+    labelWidth: 30,
+    labelTextStyle: {color: 'gray'},
+    frontColor: '#7DC1F1',
+  },
+  {value: 25, frontColor: '#FFED4B'},
+];

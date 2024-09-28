@@ -15,6 +15,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {backIcon, notiIcon} from '../../assets/svgXML';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
+  barData,
   ChartInforPageData,
   IntroduceCompanyData,
   StockHomeData3,
@@ -105,8 +106,62 @@ const IntroduceView: React.FC<{itemIndex: number}> = ({itemIndex}) => {
   );
 };
 const DetailView: React.FC<{itemIndex: number}> = () => (
-  <View style={styles.scene}>
-    <Text style={styles.text}>Chi tiết Content</Text>
+  <View style={[styles.scene, {rowGap: vh(1)}]}>
+    <View style={{width: '100%'}}>
+      <Text style={{color: 'white', fontSize: 18, fontWeight: '600'}}>
+        Kết qủa kinh doanh
+      </Text>
+    </View>
+    <View
+      style={{
+        width: '100%',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#76787E',
+        padding: vw(5),
+      }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View>
+          <Text style={{color: 'white', fontSize: 18, fontWeight: '600'}}>
+            Năm
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            columnGap: vw(2),
+          }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.blueDot} />
+            <Text style={styles.greyTxt}>Doanh thu</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.yellowDot} />
+            <Text style={styles.greyTxt}>Thu nhập ròng</Text>
+          </View>
+        </View>
+      </View>
+      <BarChart
+        data={barData}
+        barWidth={8}
+        spacing={40}
+        roundedTop
+        roundedBottom
+        hideYAxisText
+        hideRules
+        xAxisThickness={0}
+        yAxisThickness={0}
+        yAxisTextStyle={{color: 'gray'}}
+        noOfSections={3}
+        maxValue={75}
+      />
+    </View>
   </View>
 );
 
@@ -332,5 +387,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: '50%',
     textAlign: 'left',
+  },
+  blueDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#7DC1F1',
+    marginRight: 5,
+  },
+  yellowDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#FFED4B',
+    marginRight: 5,
   },
 });
