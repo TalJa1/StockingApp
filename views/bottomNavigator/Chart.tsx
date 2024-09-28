@@ -78,7 +78,7 @@ const StockView: React.FC = () => {
 const ChartView: React.FC = () => {
   return (
     <View style={centerAll}>
-      <View style={{width: vw(90)}}>
+      <View style={{width: vw(90), overflow: 'hidden'}}>
         <BarChart
           data={ChartPageData}
           barWidth={8}

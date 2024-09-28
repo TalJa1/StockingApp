@@ -15,7 +15,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {backIcon, notiIcon} from '../../assets/svgXML';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {ChartInforPageData, StockHomeData3} from '../../services/renderData';
-import { BarChart } from 'react-native-gifted-charts/dist/BarChart';
+import {BarChart} from 'react-native-gifted-charts/dist/BarChart';
 
 const ChartInfor = () => {
   useStatusBar('#1A1A1A');
@@ -36,12 +36,12 @@ const ChartInfor = () => {
 const ChartView: React.FC = () => {
   return (
     <View style={centerAll}>
-      <View style={{width: vw(90)}}>
+      <View style={{width: vw(90), overflow: 'hidden'}}>
         <BarChart
           data={ChartInforPageData}
           barWidth={8}
-          initialSpacing={10}
-          spacing={20}
+          initialSpacing={30}
+          spacing={30}
           barBorderRadius={4}
           showGradient
           yAxisThickness={0}
