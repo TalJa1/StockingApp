@@ -5,8 +5,9 @@ import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
 import {increasingCircleIcon} from '../../assets/svgXML';
-import {StatusInforChartData} from '../../services/renderData';
+import {ChartPageData, StatusInforChartData} from '../../services/renderData';
 import {InforStatusViewProps} from '../../services/typeProps';
+import { BarChart } from 'react-native-gifted-charts/dist/BarChart';
 
 const Chart = () => {
   useStatusBar('#1A1A1A');
@@ -15,8 +16,54 @@ const Chart = () => {
       <ScrollView>
         <Header />
         <InforView />
+        <ChartView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const ChartView: React.FC = () => {
+  return (
+    <View
+      style={{
+        margin: 10,
+        padding: 16,
+        borderRadius: 20,
+        backgroundColor: '#232B5D',
+      }}>
+      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+        Overview
+      </Text>
+      <View style={{padding: 20, alignItems: 'center'}}>
+        <BarChart
+          data={ChartPageData}
+          barWidth={16}
+          initialSpacing={10}
+          spacing={14}
+          barBorderRadius={4}
+          showGradient
+          yAxisThickness={0}
+          xAxisType={'dashed'}
+          xAxisColor={'lightgray'}
+          yAxisTextStyle={{color: 'lightgray'}}
+          stepValue={1000}
+          maxValue={6000}
+          noOfSections={6}
+          yAxisLabelTexts={['0', '1k', '2k', '3k', '4k', '5k', '6k']}
+          labelWidth={40}
+          xAxisLabelTextStyle={{color: 'lightgray', textAlign: 'center'}}
+          showLine
+          lineConfig={{
+            color: '#F29C6E',
+            thickness: 3,
+            curved: true,
+            hideDataPoints: true,
+            shiftY: 20,
+            initialSpacing: -30,
+          }}
+        />
+      </View>
+    </View>
   );
 };
 

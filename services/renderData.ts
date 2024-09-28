@@ -1,5 +1,5 @@
 import {arrowDownIcon, arrowUpIcon} from '../assets/svgXML';
-import { vw } from './styleSheet';
+import {vw} from './styleSheet';
 
 export const InitPageData = [
   {
@@ -120,4 +120,51 @@ export const StatusInforChartData = [
     amount: '34.11',
     icon: arrowDownIcon(vw(7), vw(7)),
   },
+];
+
+export const ChartPageData = [
+  {
+    value: 2500,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'Th2',
+  },
+  {value: 2400, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
+
+  {
+    value: 3500,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'Th3',
+  },
+  {value: 3000, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
+
+  {
+    value: 4500,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'Th4',
+  },
+  {value: 4000, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
+
+  {
+    value: 5200,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'Th5',
+  },
+  {value: 4900, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
+
+  {
+    value: 3000,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'Th6',
+  },
+  {value: 2800, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
 ];
