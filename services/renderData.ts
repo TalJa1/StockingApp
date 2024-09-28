@@ -167,4 +167,20 @@ export const ChartPageData = [
     label: 'Th6',
   },
   {value: 2800, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
+  {
+    value: 3000,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'Th7',
+  },
+  {value: 2800, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
+  {
+    value: 3000,
+    frontColor: '#006DFF',
+    gradientColor: '#009FFF',
+    spacing: 6,
+    label: 'CN',
+  },
+  {value: 2800, frontColor: '#3BE9DE', gradientColor: '#93FCF8'},
 ];

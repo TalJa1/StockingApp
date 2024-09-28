@@ -7,7 +7,7 @@ import useStatusBar from '../../services/useStatusBar';
 import {increasingCircleIcon} from '../../assets/svgXML';
 import {ChartPageData, StatusInforChartData} from '../../services/renderData';
 import {InforStatusViewProps} from '../../services/typeProps';
-import { BarChart } from 'react-native-gifted-charts/dist/BarChart';
+import {BarChart} from 'react-native-gifted-charts/dist/BarChart';
 
 const Chart = () => {
   useStatusBar('#1A1A1A');
@@ -24,22 +24,13 @@ const Chart = () => {
 
 const ChartView: React.FC = () => {
   return (
-    <View
-      style={{
-        margin: 10,
-        padding: 16,
-        borderRadius: 20,
-        backgroundColor: '#232B5D',
-      }}>
-      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-        Overview
-      </Text>
-      <View style={{padding: 20, alignItems: 'center'}}>
+    <View style={centerAll}>
+      <View style={{width: vw(90)}}>
         <BarChart
           data={ChartPageData}
-          barWidth={16}
+          barWidth={8}
           initialSpacing={10}
-          spacing={14}
+          spacing={20}
           barBorderRadius={4}
           showGradient
           yAxisThickness={0}
@@ -49,12 +40,20 @@ const ChartView: React.FC = () => {
           stepValue={1000}
           maxValue={6000}
           noOfSections={6}
-          yAxisLabelTexts={['0', '1k', '2k', '3k', '4k', '5k', '6k']}
+          yAxisLabelTexts={[
+            '$0k',
+            '$10k',
+            '$20k',
+            '$30k',
+            '$40k',
+            '$50k',
+            '$60k',
+          ]}
           labelWidth={40}
           xAxisLabelTextStyle={{color: 'lightgray', textAlign: 'center'}}
           showLine
           lineConfig={{
-            color: '#F29C6E',
+            color: '#FFED4B',
             thickness: 3,
             curved: true,
             hideDataPoints: true,
