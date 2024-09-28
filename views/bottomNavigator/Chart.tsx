@@ -35,8 +35,8 @@ const ChartView: React.FC = () => {
           showGradient
           yAxisThickness={0}
           xAxisType={'dashed'}
-          xAxisColor={'lightgray'}
-          yAxisTextStyle={{color: 'lightgray'}}
+          xAxisColor={'#76787E'}
+          yAxisTextStyle={{color: '#76787E'}}
           stepValue={1000}
           maxValue={6000}
           noOfSections={6}
@@ -50,7 +50,7 @@ const ChartView: React.FC = () => {
             '$60k',
           ]}
           labelWidth={40}
-          xAxisLabelTextStyle={{color: 'lightgray', textAlign: 'center'}}
+          xAxisLabelTextStyle={{color: '#76787E', textAlign: 'center'}}
           showLine
           lineConfig={{
             color: '#FFED4B',
