@@ -1,5 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -12,6 +19,8 @@ import {
 } from '../../services/renderData';
 import {InforStatusViewProps} from '../../services/typeProps';
 import {BarChart} from 'react-native-gifted-charts/dist/BarChart';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const Chart = () => {
   useStatusBar('#1A1A1A');
@@ -28,13 +37,22 @@ const Chart = () => {
 };
 
 const StockView: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  const handleNavigation = (stockIndex: number) => {
+    navigation.navigate('ChartInfor', {itemIndex: stockIndex});
+  };
+
   return (
     <View style={styles.stockViewContainer}>
       <Text style={styles.followHeaderTxT}>Cổ phiếu</Text>
       <View>
         {StockHomeData3.map((item, index) => {
           return (
-            <TouchableOpacity style={styles.stock3Container} key={index}>
+            <TouchableOpacity
+              style={styles.stock3Container}
+              key={index}
+              onPress={() => handleNavigation(index)}>
               <View style={{flexDirection: 'row', columnGap: vw(2)}}>
                 <Image source={item.logo} />
                 <View>

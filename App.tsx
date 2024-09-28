@@ -23,6 +23,7 @@ import SignUp from './views/account/SignUp';
 import Login from './views/account/Login';
 import PhoneVerify from './views/init/PhoneVerify';
 import Welcome from './views/init/Welcome';
+import ChartInfor from './views/chart/ChartInfor';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -130,6 +131,13 @@ const App = () => {
           component={TabNavigator}
           options={{headerShown: false}}
         />
+        {/* Chart grp */}
+        <Stack.Screen
+          name="ChartInfor"
+          component={ChartInfor}
+          options={{headerShown: false}}
+        />
+        {/* End Chart grp */}
         {/* Init */}
         <Stack.Screen
           name="Onboarding"
