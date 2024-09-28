@@ -1,3 +1,6 @@
+import {arrowDownIcon, arrowUpIcon} from '../assets/svgXML';
+import { vw } from './styleSheet';
+
 export const InitPageData = [
   {
     img: require('../assets/init/phone1.png'),
@@ -103,5 +106,18 @@ export const StockHomeData3 = [
     value: 1.2,
     chart: require('../assets/home/chart4.png'),
     amount: '343.6',
+  },
+];
+
+export const StatusInforChartData = [
+  {
+    label: 'Gain',
+    amount: '234.11',
+    icon: arrowUpIcon(vw(7), vw(7)),
+  },
+  {
+    label: 'Loss',
+    amount: '34.11',
+    icon: arrowDownIcon(vw(7), vw(7)),
   },
 ];

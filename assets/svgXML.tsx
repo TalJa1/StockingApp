@@ -11,6 +11,41 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const arrowDownIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 15.8334L10 4.16671M10 15.8334L5 10.8334M10 15.8334L15 10.8334" stroke="#C6413A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
+export const arrowUpIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 4.16663V15.8333M10 4.16663L15 9.16663M10 4.16663L5 9.16663" stroke="#5DC172" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
+export const increasingCircleIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_988_3064)">
+<path opacity="0.12" d="M7.00008 1.16671C10.2217 1.16671 12.8334 3.77838 12.8334 7.00004C12.8334 10.2217 10.2217 12.8334 7.00008 12.8334C3.77842 12.8334 1.16675 10.2217 1.16675 7.00004C1.16675 3.77838 3.77842 1.16671 7.00008 1.16671Z" fill="#5DC172"/>
+<path d="M4.66675 7.00004L7.00008 4.66671M7.00008 4.66671L9.33341 7.00004M7.00008 4.66671V9.33337M12.8334 7.00004C12.8334 3.77838 10.2217 1.16671 7.00008 1.16671C3.77842 1.16671 1.16675 3.77838 1.16675 7.00004C1.16675 10.2217 3.77842 12.8334 7.00008 12.8334C10.2217 12.8334 12.8334 10.2217 12.8334 7.00004Z" stroke="#5DC172" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_988_3064">
+<rect width="14" height="14" fill="white" transform="matrix(1 0 0 -1 0 14)"/>
+</clipPath>
+</defs>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const addIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_999_4191)">

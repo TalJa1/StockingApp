@@ -36,3 +36,9 @@ export interface StockHomeData3Interface {
   chart: any;
   amount: string;
 }
+
+export interface InforStatusViewProps {
+  label: string;
+  amount: string;
+  icon: any;
+}
