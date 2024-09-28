@@ -14,7 +14,8 @@ import useStatusBar from '../../services/useStatusBar';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {backIcon, notiIcon} from '../../assets/svgXML';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StockHomeData3} from '../../services/renderData';
+import {ChartInforPageData, StockHomeData3} from '../../services/renderData';
+import { BarChart } from 'react-native-gifted-charts/dist/BarChart';
 
 const ChartInfor = () => {
   useStatusBar('#1A1A1A');
@@ -26,8 +27,44 @@ const ChartInfor = () => {
       <ScrollView>
         <Header />
         <BannerView itemIndex={itemIndex} />
+        <ChartView />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const ChartView: React.FC = () => {
+  return (
+    <View style={centerAll}>
+      <View style={{width: vw(90)}}>
+        <BarChart
+          data={ChartInforPageData}
+          barWidth={8}
+          initialSpacing={10}
+          spacing={20}
+          barBorderRadius={4}
+          showGradient
+          yAxisThickness={0}
+          xAxisType={'dashed'}
+          xAxisColor={'#76787E'}
+          hideYAxisText
+          stepValue={1000}
+          maxValue={6000}
+          noOfSections={6}
+          labelWidth={40}
+          xAxisLabelTextStyle={{color: '#76787E', textAlign: 'center'}}
+          showLine
+          lineConfig={{
+            color: '#FFED4B',
+            thickness: 3,
+            curved: true,
+            hideDataPoints: true,
+            shiftY: 20,
+            initialSpacing: -30,
+          }}
+        />
+      </View>
+    </View>
   );
 };
 

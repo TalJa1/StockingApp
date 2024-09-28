@@ -208,3 +208,90 @@ export const ChartPageData = [
     gradientColor: '#2C2C2C',
   },
 ];
+
+export const ChartInforPageData = [
+  {
+    value: 2500,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'Th2',
+  },
+  {
+    value: 2400,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+  {
+    value: 3500,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'Th3',
+  },
+  {
+    value: 3000,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+  {
+    value: 4500,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'Th4',
+  },
+  {
+    value: 4000,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+  {
+    value: 5200,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'Th5',
+  },
+  {
+    value: 4900,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+  {
+    value: 3000,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'Th6',
+  },
+  {
+    value: 2800,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+  {
+    value: 3000,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'Th7',
+  },
+  {
+    value: 2800,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+  {
+    value: 3000,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+    spacing: 6,
+    label: 'CN',
+  },
+  {
+    value: 2800,
+    frontColor: '#2C2C2C',
+    gradientColor: '#2C2C2C',
+  },
+];
