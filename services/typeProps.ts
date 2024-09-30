@@ -42,3 +42,11 @@ export interface InforStatusViewProps {
   amount: string;
   icon: any;
 }
+
+export interface UserProfile {
+  email: string;
+  familyName: string | null;
+  givenName: string | null;
+  name: string | null;
+  photoUrl: string | null;
+}

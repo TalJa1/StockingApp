@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
@@ -20,7 +21,7 @@ import {
   passwordHiddenIcon,
   stocklineIcon,
 } from '../../assets/svgXML';
-import {SignUpInputFieldProps} from '../../services/typeProps';
+import {SignUpInputFieldProps, UserProfile} from '../../services/typeProps';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
@@ -30,6 +31,7 @@ import {
 
 const Login = () => {
   useStatusBar('#1A1A1A');
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -148,6 +150,13 @@ const InputField: React.FC<SignUpInputFieldProps> = ({
 };
 
 const FooterView: React.FC = () => {
+  const [user, setUser] = useState<UserProfile>({
+    email: 'test@gmail.com',
+    familyName: 'Nguyen',
+    givenName: 'Tien',
+    name: 'Nguyen Tien',
+    photoUrl: null,
+  });
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const handleLoginPress = () => {
     navigation.navigate('SignUp');
@@ -160,7 +169,14 @@ const FooterView: React.FC = () => {
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
-        // setState({ userInfo: response.data });
+        setUser({
+          email: response.data.user.email,
+          familyName: response.data.user.familyName,
+          givenName: response.data.user.givenName,
+          name: response.data.user.name,
+          photoUrl: response.data.user.photo,
+        });
+
         navigation.navigate('Welcome');
       } else {
         // sign in was cancelled by user
@@ -170,7 +186,6 @@ const FooterView: React.FC = () => {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const signOut = async () => {
     try {
       await GoogleSignin.signOut();
