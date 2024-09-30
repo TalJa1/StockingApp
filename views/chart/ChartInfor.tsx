@@ -170,6 +170,20 @@ const DetailView: React.FC<{itemIndex: number}> = () => (
         yAxisThickness={0}
         yAxisTextStyle={{color: 'gray'}}
         noOfSections={3}
+        renderTooltip={(item: any, index: number) => {
+          return (
+            <View
+              key={index}
+              style={{
+                backgroundColor: 'white',
+                paddingHorizontal: 6,
+                paddingVertical: 4,
+                borderRadius: 4,
+              }}>
+              <Text style={{color: '#1A1A1A'}}>{item.value}</Text>
+            </View>
+          );
+        }}
       />
     </View>
   </View>

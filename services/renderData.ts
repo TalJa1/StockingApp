@@ -326,41 +326,41 @@ export const IntroduceCompanyData = [
 
 export const barData = [
   {
-    value: 40,
+    value: 30.01,
     label: '2020',
     spacing: 2,
     labelWidth: 40,
     labelTextStyle: {color: 'gray'},
     frontColor: '#7DC1F1',
   },
-  {value: 20, frontColor: '#FFED4B'},
+  {value: 4.6, frontColor: '#FFED4B'},
   {
-    value: 50,
+    value: 41.09,
     label: '2021',
     spacing: 2,
     labelWidth: 40,
     labelTextStyle: {color: 'gray'},
     frontColor: '#7DC1F1',
   },
-  {value: 40, frontColor: '#FFED4B'},
+  {value: 5.3, frontColor: '#FFED4B'},
   {
-    value: 75,
+    value: 69.1,
     label: '2022',
     spacing: 2,
     labelWidth: 40,
     labelTextStyle: {color: 'gray'},
     frontColor: '#7DC1F1',
   },
-  {value: 25, frontColor: '#FFED4B'},
+  {value: 10.7, frontColor: '#FFED4B'},
   {
-    value: 75,
+    value: 75.4,
     label: '2023',
     spacing: 2,
     labelWidth: 40,
     labelTextStyle: {color: 'gray'},
     frontColor: '#7DC1F1',
   },
-  {value: 25, frontColor: '#FFED4B'},
+  {value: 3.87, frontColor: '#FFED4B'},
 ];
 
 export const VerifyData = [
