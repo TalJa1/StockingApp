@@ -11,8 +11,18 @@ import React from 'react';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {stocklineIcon} from '../../assets/svgXML';
+import {UserProfile} from '../../services/typeProps';
+import {RouteProp, useRoute} from '@react-navigation/native';
+
+type WelcomeRouteProp = RouteProp<
+  {Welcome: {userData: UserProfile}},
+  'Welcome'
+>;
 
 const Welcome = () => {
+  const route = useRoute<WelcomeRouteProp>();
+  const user = route.params.userData;
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flex: 1, paddingHorizontal: vw(5)}}>
@@ -21,7 +31,7 @@ const Welcome = () => {
             {stocklineIcon(vw(20), vw(20))}
           </View>
           <Text style={styles.label}>
-            Xin chào Agatha Bella!{' '}
+            Xin chào {user.givenName ?? 'New User'}!{' '}
             <Image source={require('../../assets/init/wavingHand.png')} />
           </Text>
           <Text style={styles.label}>Chào mừng tới Stockline</Text>

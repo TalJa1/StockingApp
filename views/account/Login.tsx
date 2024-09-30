@@ -28,6 +28,7 @@ import {
   GoogleSignin,
   isSuccessResponse,
 } from '@react-native-google-signin/google-signin';
+import {saveData} from '../../services/storage';
 
 const Login = () => {
   useStatusBar('#1A1A1A');
@@ -150,13 +151,6 @@ const InputField: React.FC<SignUpInputFieldProps> = ({
 };
 
 const FooterView: React.FC = () => {
-  const [user, setUser] = useState<UserProfile>({
-    email: 'test@gmail.com',
-    familyName: 'Nguyen',
-    givenName: 'Tien',
-    name: 'Nguyen Tien',
-    photoUrl: null,
-  });
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const handleLoginPress = () => {
     navigation.navigate('SignUp');
@@ -169,15 +163,18 @@ const FooterView: React.FC = () => {
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
-        setUser({
+        const user = {
           email: response.data.user.email,
           familyName: response.data.user.familyName,
           givenName: response.data.user.givenName,
           name: response.data.user.name,
           photoUrl: response.data.user.photo,
-        });
+        };
+        await saveData('userLoginStorage', user);
 
-        navigation.navigate('Welcome');
+        navigation.navigate('Welcome', {
+          userData: user,
+        });
       } else {
         // sign in was cancelled by user
       }
