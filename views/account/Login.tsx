@@ -28,17 +28,32 @@ import {
   GoogleSignin,
   isSuccessResponse,
 } from '@react-native-google-signin/google-signin';
-import {saveData} from '../../services/storage';
+import {loadData, saveData} from '../../services/storage';
 
 const Login = () => {
   useStatusBar('#1A1A1A');
+  const [firstTime, setFirstTime] = useState(true);
+
+  const fetchIsFirstTime = async () => {
+    loadData<boolean>('isFirstTime')
+      .then(data => {
+        setFirstTime(data);
+      })
+      .catch(() => {
+        setFirstTime(true);
+      });
+  };
+
+  useEffect(() => {
+    fetchIsFirstTime();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <HeaderView />
         <MainForm />
-        <FooterView />
+        <FooterView isFirstTime={firstTime} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -150,7 +165,7 @@ const InputField: React.FC<SignUpInputFieldProps> = ({
   );
 };
 
-const FooterView: React.FC = () => {
+const FooterView: React.FC<{isFirstTime: boolean}> = ({isFirstTime}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const handleLoginPress = () => {
     navigation.navigate('SignUp');
@@ -172,9 +187,11 @@ const FooterView: React.FC = () => {
         };
         await saveData('userLoginStorage', user);
 
-        navigation.navigate('Welcome', {
-          userData: user,
-        });
+        isFirstTime
+          ? navigation.navigate('Welcome', {
+              userData: user,
+            })
+          : navigation.navigate('Main');
       } else {
         // sign in was cancelled by user
       }

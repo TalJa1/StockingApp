@@ -12,7 +12,9 @@ import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {stocklineIcon} from '../../assets/svgXML';
 import {UserProfile} from '../../services/typeProps';
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {saveData} from '../../services/storage';
 
 type WelcomeRouteProp = RouteProp<
   {Welcome: {userData: UserProfile}},
@@ -20,8 +22,14 @@ type WelcomeRouteProp = RouteProp<
 >;
 
 const Welcome = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute<WelcomeRouteProp>();
   const user = route.params.userData;
+
+  const handleStart = () => () => {
+    saveData('isFirstTime', false);
+    navigation.navigate('Main');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,7 +45,7 @@ const Welcome = () => {
           <Text style={styles.label}>Chào mừng tới Stockline</Text>
           <Text style={styles.desp}>Thật tuyệt khi có bạn ở đây</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleStart()}>
           <View style={[centerAll, styles.btn]}>
             <Text style={styles.btntxt}>Bắt đầu</Text>
           </View>
