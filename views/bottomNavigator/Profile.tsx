@@ -5,7 +5,7 @@ import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
 import {ProfileRenderView} from '../../services/renderData';
-import {nextIcon} from '../../assets/svgXML';
+import {nextIcon, profileMoneyIcon} from '../../assets/svgXML';
 import {UserProfile} from '../../services/typeProps';
 import {loadData} from '../../services/storage';
 
@@ -44,17 +44,32 @@ const Profile = () => {
   );
 };
 
-const AccountRender: React.FC<{ data: UserProfile }> = ({ data }) => {
+const AccountRender: React.FC<{data: UserProfile}> = ({data}) => {
   const firstLetter = data.email ? data.email.charAt(0).toUpperCase() : 'A';
 
   return (
-    <View style={styles.container2}>
-      <View style={styles.circle}>
-        <Text style={styles.circleText}>{firstLetter}</Text>
+    <View>
+      <View style={styles.container2}>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>{firstLetter}</Text>
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.name}>{data.name}</Text>
+          <Text style={styles.email}>{data.email}</Text>
+        </View>
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.email}>{data.email}</Text>
+      <View>
+        <View style={styles.container3}>
+          <View style={styles.container4}>
+            <View style={styles.circle1}>{profileMoneyIcon(vw(7), vw(7))}</View>
+            <View style={styles.textContainer}>
+              <Text style={styles.name}>Mời bạn bè</Text>
+              <Text style={styles.email}>
+                Hãy mời thêm bạn bè để được đ100.000
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -153,5 +168,29 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 12,
     color: '#76787E',
+  },
+  circle1: {
+    width: vw(13),
+    height: vw(13),
+    borderRadius: vw(60),
+    backgroundColor: '#FFED4B',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  container3: {
+    paddingHorizontal: vw(5),
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: vh(2),
+  },
+  container4: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#76787E',
+    padding: 10,
+    borderRadius: 6,
+    backgroundColor: '#2C2C2C',
   },
 });

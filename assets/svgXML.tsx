@@ -11,6 +11,15 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const profileMoneyIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.6665 6.66667H9.58317C9.25165 6.66667 8.93371 6.79836 8.69929 7.03278C8.46487 7.2672 8.33317 7.58515 8.33317 7.91667C8.33317 8.24819 8.46487 8.56613 8.69929 8.80055C8.93371 9.03497 9.25165 9.16667 9.58317 9.16667H10.4165C10.748 9.16667 11.066 9.29836 11.3004 9.53278C11.5348 9.7672 11.6665 10.0851 11.6665 10.4167C11.6665 10.7482 11.5348 11.0661 11.3004 11.3006C11.066 11.535 10.748 11.6667 10.4165 11.6667H8.33317M9.99984 11.6667V12.9167M9.99984 5.41667V6.66667M4.1665 17.5V4.16667C4.1665 3.72464 4.3421 3.30072 4.65466 2.98816C4.96722 2.67559 5.39114 2.5 5.83317 2.5H14.1665C14.6085 2.5 15.0325 2.67559 15.345 2.98816C15.6576 3.30072 15.8332 3.72464 15.8332 4.16667V17.5L13.3332 15.8333L11.6665 17.5L9.99984 15.8333L8.33317 17.5L6.6665 15.8333L4.1665 17.5Z" stroke="#1A1A1A" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const accountIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="32" height="32" rx="16" fill="#2C2C2C"/>
