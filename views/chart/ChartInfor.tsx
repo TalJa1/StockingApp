@@ -175,12 +175,17 @@ const DetailView: React.FC<{itemIndex: number}> = () => (
             <View
               key={index}
               style={{
+                position: 'absolute',
+                bottom: -vh(10),
+                left: vw(8),
                 backgroundColor: 'white',
                 paddingHorizontal: 6,
                 paddingVertical: 4,
                 borderRadius: 4,
               }}>
-              <Text style={{color: '#1A1A1A'}}>{item.value}</Text>
+              <Text style={{color: '#1A1A1A', fontWeight: '600'}}>
+                {item.value} tỷ
+              </Text>
             </View>
           );
         }}
