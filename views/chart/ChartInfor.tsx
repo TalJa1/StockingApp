@@ -210,8 +210,8 @@ const ChartView: React.FC = () => {
           xAxisType={'dashed'}
           xAxisColor={'#76787E'}
           hideYAxisText
-          stepValue={1000}
-          maxValue={6000}
+          stepValue={500}
+          maxValue={1500}
           noOfSections={6}
           labelWidth={40}
           xAxisLabelTextStyle={{color: '#76787E', textAlign: 'center'}}
@@ -223,6 +223,26 @@ const ChartView: React.FC = () => {
             hideDataPoints: true,
             shiftY: 20,
             initialSpacing: -30,
+          }}
+          renderTooltip={(item: any, index: number) => {
+            return (
+              <View
+                key={index}
+                style={{
+                  zIndex: 10,
+                  position: 'absolute',
+                  bottom: -vh(10),
+                  left: vw(8),
+                  backgroundColor: '#FFED4B',
+                  paddingHorizontal: 6,
+                  paddingVertical: 4,
+                  borderRadius: 4,
+                }}>
+                <Text style={{color: '#1A1A1A', fontWeight: '600'}}>
+                  ${item.value}
+                </Text>
+              </View>
+            );
           }}
         />
       </View>
