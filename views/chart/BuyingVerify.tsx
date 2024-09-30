@@ -23,8 +23,6 @@ const BuyingVerify = () => {
   const route = useRoute();
   const {dataIndex} = route.params as {dataIndex: number};
 
-  console.log('dataIndex', dataIndex);
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -44,6 +42,13 @@ const PayMethod: React.FC = () => {
   const selectRadioButton = (index: number) => {
     setSelectedMethod(index);
   };
+
+  const handleBuy = () => {
+    console.log('Buy');
+  };
+
+  const isButtonDisabled = selectedMethod === null;
+
   return (
     <View style={{paddingHorizontal: vw(5), marginVertical: vh(2)}}>
       <Text
@@ -76,17 +81,19 @@ const PayMethod: React.FC = () => {
         );
       })}
       <TouchableOpacity
+        onPress={handleBuy}
         style={[
           {
-            backgroundColor: '#FFED4B',
+            backgroundColor: isButtonDisabled ? '#CCCCCC' : '#FFED4B',
             paddingHorizontal: vw(5),
             paddingVertical: vh(2),
             borderRadius: 16,
             marginTop: vh(2),
           },
           centerAll,
-        ]}>
-        <Text style={{color: '#1A1A1A', fontSize: 14, fontWeight: '600'}}>
+        ]}
+        disabled={isButtonDisabled}>
+        <Text style={{ color: '#1A1A1A', fontSize: 14, fontWeight: '600' }}>
           Đặt lệnh
         </Text>
       </TouchableOpacity>
