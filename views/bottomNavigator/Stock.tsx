@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {container} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -9,9 +9,7 @@ const Stock = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View>
-          <Text>Stock</Text>
-        </View>
+        <View />
       </ScrollView>
     </SafeAreaView>
   );

@@ -54,8 +54,8 @@ const AccountRender: React.FC<{data: UserProfile}> = ({data}) => {
           <Text style={styles.circleText}>{firstLetter}</Text>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.email}>{data.email}</Text>
+          <Text style={styles.name}>{data.name ?? 'New User'}</Text>
+          <Text style={styles.email}>{data.email ?? 'newuser@gmail.com'}</Text>
         </View>
       </View>
       <View>
@@ -68,6 +68,7 @@ const AccountRender: React.FC<{data: UserProfile}> = ({data}) => {
                 Hãy mời thêm bạn bè để được đ100.000
               </Text>
             </View>
+            {nextIcon(vw(8), vw(8), '#76787E')}
           </View>
         </View>
       </View>
