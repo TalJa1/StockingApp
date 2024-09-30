@@ -202,7 +202,8 @@ const ChartView: React.FC = () => {
           isAnimated
           data={ChartInforPageData}
           barWidth={8}
-          initialSpacing={30}
+          initialSpacing={60}
+          endSpacing={60}
           spacing={30}
           barBorderRadius={4}
           showGradient
