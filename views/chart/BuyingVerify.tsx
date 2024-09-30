@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -18,6 +19,7 @@ import {
 } from '../../services/renderData';
 import {backIcon} from '../../assets/svgXML';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 const BuyingVerify = () => {
   const route = useRoute();
@@ -37,14 +39,42 @@ const BuyingVerify = () => {
 };
 
 const PayMethod: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [selectedMethod, setSelectedMethod] = useState<number | null>(null);
 
   const selectRadioButton = (index: number) => {
     setSelectedMethod(index);
   };
 
-  const handleBuy = () => {
-    console.log('Buy');
+  const handleBuy = async () => {
+    let epochTimeSeconds = Math.round(new Date().getTime() / 1000).toString();
+    let payload = epochTimeSeconds + 'some message';
+    const rnBiometrics = new ReactNativeBiometrics();
+
+    rnBiometrics
+      .createSignature({
+        promptMessage: 'Verify your identity',
+        payload: payload,
+      })
+      .then(resultObject => {
+        const {success, signature} = resultObject;
+
+        if (success) {
+          console.log(signature);
+          Alert.alert(
+            'Success',
+            'Successful transaction.',
+            [
+              {
+                text: 'OK',
+                onPress: () => navigation.navigate('Main'), // Replace 'MainScreen' with the actual name of your main screen
+              },
+            ],
+            {cancelable: false},
+          );
+          // verifySignatureWithServer(signature, payload);
+        }
+      });
   };
 
   const isButtonDisabled = selectedMethod === null;
@@ -93,7 +123,7 @@ const PayMethod: React.FC = () => {
           centerAll,
         ]}
         disabled={isButtonDisabled}>
-        <Text style={{ color: '#1A1A1A', fontSize: 14, fontWeight: '600' }}>
+        <Text style={{color: '#1A1A1A', fontSize: 14, fontWeight: '600'}}>
           Đặt lệnh
         </Text>
       </TouchableOpacity>

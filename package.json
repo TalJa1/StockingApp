@@ -18,6 +18,7 @@
     "@react-navigation/native-stack": "^6.11.0",
     "react": "18.3.1",
     "react-native": "0.75.3",
+    "react-native-biometrics": "^3.0.1",
     "react-native-country-picker-modal": "^2.0.0",
     "react-native-gifted-charts": "^1.4.41",
     "react-native-linear-gradient": "^2.8.3",
