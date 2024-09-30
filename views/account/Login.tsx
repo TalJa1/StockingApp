@@ -60,6 +60,7 @@ const Login = () => {
 };
 
 const MainForm: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [inputData, setInputData] = useState({
     email: '',
     password: '',
@@ -124,7 +125,11 @@ const MainForm: React.FC = () => {
         onPress={handleSubmit}>
         <Text style={styles.btnMaintxt}>Tiếp tục</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{alignSelf: 'flex-end'}}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('PhoneVerify');
+        }}
+        style={{alignSelf: 'flex-end'}}>
         <Text style={{color: '#FFED4B', fontWeight: '600'}}>
           Quên mật khẩu?
         </Text>
