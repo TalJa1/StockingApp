@@ -257,7 +257,7 @@ export const ChartInforPageData = [
     gradientColor: '#2C2C2C',
   },
   {
-    value: 792.57,
+    value: 1592.57,
     frontColor: '#2C2C2C',
     gradientColor: '#2C2C2C',
     spacing: 6,
@@ -276,7 +276,7 @@ export const ChartInforPageData = [
     label: '5N',
   },
   {
-    value: 801.66,
+    value: 1001.66,
     frontColor: '#2C2C2C',
     gradientColor: '#2C2C2C',
   },

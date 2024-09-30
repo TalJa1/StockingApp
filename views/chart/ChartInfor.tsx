@@ -211,7 +211,7 @@ const ChartView: React.FC = () => {
           xAxisColor={'#76787E'}
           hideYAxisText
           stepValue={500}
-          maxValue={1500}
+          maxValue={2000}
           noOfSections={6}
           labelWidth={40}
           xAxisLabelTextStyle={{color: '#76787E', textAlign: 'center'}}
