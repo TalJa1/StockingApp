@@ -5,17 +5,48 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {backIcon} from '../../assets/svgXML';
 import useStatusBar from '../../services/useStatusBar';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import OTPTextInput from 'react-native-otp-textinput';
 
 const OtpVerify = () => {
   useStatusBar('#1A1A1A');
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const [otp, setOtp] = useState('');
+  const [otpBackgroundColors, setOtpBackgroundColors] = useState<string[]>([
+    'black',
+    'black',
+    'black',
+    'black',
+    'black',
+  ]);
+
+  const handleOtpChange = (otpValue: string) => {
+    setOtp(otpValue);
+  };
+
+  const handleCellTextChange = (text: string, index: number) => {
+    const newBackgroundColors = [...otpBackgroundColors];
+    newBackgroundColors[index] = text ? 'yellow' : 'black';
+    setOtpBackgroundColors(newBackgroundColors);
+  };
+
+  const handleVerify = () => {
+    // Add your OTP verification logic here
+    if (otp.length === 5) {
+      // Assuming OTP length is 5
+      console.log('OTP Verified:', otp);
+      // Navigate to the next screen or perform any action
+    } else {
+      console.log('Invalid OTP');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -31,8 +62,18 @@ const OtpVerify = () => {
               Chúng tôi đã gửi mã xác minh đến số điện thoại di động của bạn
             </Text>
           </View>
-
-          <TouchableOpacity style={styles.btnSendOTP}>
+          <View>
+            <OTPTextInput
+              handleTextChange={handleOtpChange}
+              inputCount={5}
+              containerStyle={styles.otpContainer}
+              textInputStyle={styles.otpInput}
+              tintColor="#FFED4B"
+              offTintColor="#FFED4B"
+              handleCellTextChange={handleCellTextChange}
+            />
+          </View>
+          <TouchableOpacity style={styles.btnSendOTP} onPress={handleVerify}>
             <Text style={styles.btnOtptxt}>Xác minh tài khoản</Text>
           </TouchableOpacity>
         </View>
@@ -79,5 +120,17 @@ const styles = StyleSheet.create({
     borderColor: '#76787E',
     borderRadius: 10,
     alignSelf: 'flex-start',
+  },
+  otpContainer: {
+    marginVertical: vh(2),
+  },
+  otpInput: {
+    borderWidth: 1,
+    borderColor: '#FFED4B',
+    borderRadius: 12,
+    width: vw(15),
+    height: vw(15),
+    textAlign: 'center',
+    color: '#FFED4B',
   },
 });
