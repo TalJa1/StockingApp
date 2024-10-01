@@ -1,4 +1,5 @@
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -35,7 +36,11 @@ const PhoneVerify = () => {
   };
 
   const handlePress = () => {
-    navigation.navigate('OtpVerify');
+    if (phoneRef.current && phoneRef.current.isValidNumber()) {
+      navigation.navigate('OtpVerify');
+    } else {
+      Alert.alert('Số điện thoại không phù hợp', 'Hãy nhập lại số điện thoại');
+    }
   };
 
   return (
