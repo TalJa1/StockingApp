@@ -5,14 +5,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {backIcon} from '../../assets/svgXML';
 import useStatusBar from '../../services/useStatusBar';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import OTPTextInput from 'react-native-otp-textinput';
+import {Notifications} from 'react-native-notifications';
 
 const OtpVerify = () => {
   useStatusBar('#1A1A1A');
@@ -25,6 +26,43 @@ const OtpVerify = () => {
     'black',
     'black',
   ]);
+
+  useFocusEffect(
+    useCallback(() => {
+      Notifications.registerRemoteNotifications();
+
+      Notifications.events().registerNotificationReceivedForeground(
+        (notification, completion) => {
+          console.log(
+            `Notification received in foreground: ${notification.title} : ${notification.body}`,
+          );
+          completion({alert: true, sound: true, badge: false});
+        },
+      );
+
+      Notifications.events().registerNotificationOpened(
+        (notification, completion) => {
+          console.log(`Notification opened: ${notification.payload}`);
+          completion();
+        },
+      );
+
+      Notifications.postLocalNotification({
+        title: 'OTP Verification',
+        body: 'Please enter the OTP sent to your phone.',
+        sound: 'chime.aiff',
+        identifier: '',
+        payload: undefined,
+        badge: 0,
+        type: '',
+        thread: '',
+      });
+
+      return () => {
+        // Clean up any listeners if necessary
+      };
+    }, []),
+  );
 
   const handleOtpChange = (otpValue: string) => {
     setOtp(otpValue);
