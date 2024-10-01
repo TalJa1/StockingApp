@@ -34,6 +34,10 @@ const PhoneVerify = () => {
     setModalVisible(true);
   };
 
+  const handlePress = () => {
+    navigation.navigate('OtpVerify');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -68,7 +72,7 @@ const PhoneVerify = () => {
               countryCode={'VN'}
             />
           )}
-          <TouchableOpacity style={styles.btnSendOTP}>
+          <TouchableOpacity onPress={handlePress} style={styles.btnSendOTP}>
             <Text style={styles.btnOtptxt}>Gửi mã</Text>
           </TouchableOpacity>
         </View>
