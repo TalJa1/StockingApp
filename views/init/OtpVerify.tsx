@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {backIcon} from '../../assets/svgXML';
@@ -13,7 +13,8 @@ import useStatusBar from '../../services/useStatusBar';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import OTPTextInput from 'react-native-otp-textinput';
-import {Notifications} from 'react-native-notifications';
+import {PermissionsAndroid, Platform} from 'react-native';
+import { Notifications } from 'react-native-notifications';
 
 const OtpVerify = () => {
   useStatusBar('#1A1A1A');
@@ -27,26 +28,33 @@ const OtpVerify = () => {
     'black',
   ]);
 
+  useEffect(() => {
+    const requestNotificationPermission = async () => {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+          {
+            title: 'Notification Permission',
+            message: 'This app needs access to show notifications.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Notification permission granted');
+        } else {
+          console.log('Notification permission denied');
+        }
+      }
+    };
+
+    requestNotificationPermission();
+  }, []);
+
   useFocusEffect(
     useCallback(() => {
-      Notifications.registerRemoteNotifications();
-
-      Notifications.events().registerNotificationReceivedForeground(
-        (notification, completion) => {
-          console.log(
-            `Notification received in foreground: ${notification.title} : ${notification.body}`,
-          );
-          completion({alert: true, sound: true, badge: false});
-        },
-      );
-
-      Notifications.events().registerNotificationOpened(
-        (notification, completion) => {
-          console.log(`Notification opened: ${notification.payload}`);
-          completion();
-        },
-      );
-
+      // Post a local notification
       Notifications.postLocalNotification({
         title: 'OTP Verification',
         body: 'Please enter the OTP sent to your phone.',
