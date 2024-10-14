@@ -21,6 +21,7 @@ const OtpVerify = () => {
   useStatusBar('#1A1A1A');
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [otp, setOtp] = useState('');
+  const [generatedOtp, setGeneratedOtp] = useState('');
   const [otpBackgroundColors, setOtpBackgroundColors] = useState<string[]>([
     'black',
     'black',
@@ -55,10 +56,12 @@ const OtpVerify = () => {
 
   useFocusEffect(
     useCallback(() => {
+      const randomOtp = Math.floor(10000 + Math.random() * 90000).toString();
+      setGeneratedOtp(randomOtp);
       // Post a local notification
       Notifications.postLocalNotification({
         title: 'OTP Xác Minh Tài Khoản',
-        body: 'Xin hãy nhập số OTP 55123 để xác minh tài khoản của bạn',
+        body: `Xin hãy nhập số OTP ${randomOtp} để xác minh tài khoản của bạn`,
         sound: 'chime.aiff',
         identifier: '',
         payload: undefined,
@@ -85,7 +88,7 @@ const OtpVerify = () => {
 
   const handleVerify = () => {
     // Add your OTP verification logic here
-    if (otp.length === 5 && otp === '55123') {
+    if (otp.length === 5 && otp === generatedOtp) {
       navigation.navigate('PasswordModifying');
     } else {
       console.log('OTP lỗi');
