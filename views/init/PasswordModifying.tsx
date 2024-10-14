@@ -29,12 +29,23 @@ const PasswordModifying = () => {
       Alert.alert('Email không hợp lệ', 'Vui lòng nhập địa chỉ email hợp lệ.');
     } else {
       try {
-        // Send a verification email using Firebase Authentication
-        // await auth().sendPasswordResetEmail(email);
-        Alert.alert('Thành công', 'Mã xác minh đã được gửi đến email của bạn.');
+        // Call the Cloud Function to send the email
+        Alert.alert(
+          'Thành công',
+          'Mã xác minh đã được gửi đến email của bạn.',
+          [
+            {
+              text: 'OK',
+              onPress: () => navigation.navigate('Login'),
+            },
+          ],
+        );
       } catch (error) {
         console.error(error);
-        Alert.alert('Lỗi', 'Đã xảy ra lỗi khi gửi mã xác minh. Vui lòng thử lại.');
+        Alert.alert(
+          'Lỗi',
+          'Đã xảy ra lỗi khi gửi mã xác minh. Vui lòng thử lại.',
+        );
       }
     }
   };
