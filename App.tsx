@@ -26,6 +26,7 @@ import Welcome from './views/init/Welcome';
 import ChartInfor from './views/chart/ChartInfor';
 import BuyingVerify from './views/chart/BuyingVerify';
 import OtpVerify from './views/init/OtpVerify';
+import PasswordModifying from './views/init/PasswordModifying';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -149,6 +150,11 @@ const App = () => {
         <Stack.Screen
           name="Onboarding"
           component={Onboarding}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="PasswordModifying"
+          component={PasswordModifying}
           options={{headerShown: false}}
         />
         <Stack.Screen
