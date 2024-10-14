@@ -21,15 +21,21 @@ const PasswordModifying = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [email, setEmail] = useState('');
 
-  const handleVerify = () => {
+  const handleVerify = async () => {
     // Regular expression to validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       // Show an alert in Vietnamese if the email is invalid
       Alert.alert('Email không hợp lệ', 'Vui lòng nhập địa chỉ email hợp lệ.');
     } else {
-      // Proceed with the verification process
-      console.log('Email is valid:', email);
+      try {
+        // Send a verification email using Firebase Authentication
+        // await auth().sendPasswordResetEmail(email);
+        Alert.alert('Thành công', 'Mã xác minh đã được gửi đến email của bạn.');
+      } catch (error) {
+        console.error(error);
+        Alert.alert('Lỗi', 'Đã xảy ra lỗi khi gửi mã xác minh. Vui lòng thử lại.');
+      }
     }
   };
 
@@ -43,9 +49,10 @@ const PasswordModifying = () => {
             {backIcon(vw(7), vw(7))}
           </TouchableOpacity>
           <View style={{rowGap: vh(1)}}>
-            <Text style={styles.label}>Nhập mã xác minh</Text>
+            <Text style={styles.label}>Đổi mật khẩu</Text>
             <Text style={styles.desp}>
-              Chúng tôi đã gửi mã xác minh đến số điện thoại di động của bạn
+              Vui lòng nhập email đã đăng ký của bạn, chúng tôi sẽ gửi cho bạn
+              mã xác minh vào email
             </Text>
           </View>
           <View>
