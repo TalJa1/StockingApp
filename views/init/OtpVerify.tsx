@@ -57,7 +57,7 @@ const OtpVerify = () => {
       // Post a local notification
       Notifications.postLocalNotification({
         title: 'OTP Verification',
-        body: 'Please enter the OTP sent to your phone.',
+        body: 'Please enter the OTP 55123 sent to your phone.',
         sound: 'chime.aiff',
         identifier: '',
         payload: undefined,
@@ -84,7 +84,7 @@ const OtpVerify = () => {
 
   const handleVerify = () => {
     // Add your OTP verification logic here
-    if (otp.length === 5) {
+    if (otp.length === 5 && otp === '55123') {
       // Assuming OTP length is 5
       console.log('OTP Verified:', otp);
       // Navigate to the next screen or perform any action
