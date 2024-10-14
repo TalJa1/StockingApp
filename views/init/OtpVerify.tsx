@@ -1,4 +1,5 @@
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -56,8 +57,8 @@ const OtpVerify = () => {
     useCallback(() => {
       // Post a local notification
       Notifications.postLocalNotification({
-        title: 'OTP Verification',
-        body: 'Please enter the OTP 55123 sent to your phone.',
+        title: 'OTP Xác Minh Tài Khoản',
+        body: 'Xin hãy nhập số OTP 55123 để xác minh tài khoản của bạn',
         sound: 'chime.aiff',
         identifier: '',
         payload: undefined,
@@ -85,11 +86,11 @@ const OtpVerify = () => {
   const handleVerify = () => {
     // Add your OTP verification logic here
     if (otp.length === 5 && otp === '55123') {
-      // Assuming OTP length is 5
-      console.log('OTP Verified:', otp);
-      // Navigate to the next screen or perform any action
+      navigation.navigate('PasswordModifying');
     } else {
-      console.log('Invalid OTP');
+      console.log('OTP lỗi');
+      // Show an alert for invalid OTP
+      Alert.alert('OTP lỗi', 'Sai OTP, vui lòng nhập lại');
     }
   };
 
