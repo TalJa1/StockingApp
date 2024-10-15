@@ -441,3 +441,11 @@ export const ProfileRenderView = [
     icon: questionIcon(vw(8), vw(8)),
   },
 ];
+
+export const Accounts = [
+  {
+    name: 'Nguyễn Văn A',
+    email: 'a1@gmail.com',
+    pass: '123456',
+  },
+];

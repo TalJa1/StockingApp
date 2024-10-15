@@ -50,3 +50,9 @@ export interface UserProfile {
   name: string | null;
   photoUrl: string | null;
 }
+
+export interface AccountInterface {
+  name: string;
+  email: string;
+  pass: string;
+}

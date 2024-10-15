@@ -21,7 +21,7 @@ import {
   passwordHiddenIcon,
   stocklineIcon,
 } from '../../assets/svgXML';
-import {SignUpInputFieldProps, UserProfile} from '../../services/typeProps';
+import {AccountInterface, SignUpInputFieldProps, UserProfile} from '../../services/typeProps';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
@@ -29,6 +29,7 @@ import {
   isSuccessResponse,
 } from '@react-native-google-signin/google-signin';
 import {loadData, saveData} from '../../services/storage';
+import { Accounts } from '../../services/renderData';
 
 const Login = () => {
   useStatusBar('#1A1A1A');
@@ -52,14 +53,14 @@ const Login = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <HeaderView />
-        <MainForm />
+        <MainForm isFirst={firstTime}/>
         <FooterView isFirstTime={firstTime} />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const MainForm: React.FC = () => {
+const MainForm: React.FC<{isFirst: boolean}> = ({isFirst}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [inputData, setInputData] = useState({
     email: '',
@@ -68,6 +69,24 @@ const MainForm: React.FC = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailWarning, setEmailWarning] = useState('');
+  const [accounts, setAccounts] = useState<AccountInterface[]>(Accounts);
+
+  const fetchAccounts = async () => {
+    // Fetch accounts from the database
+    await loadData<AccountInterface[]>('accountsStorage')
+      .then(data => {
+        if (data) {
+          setAccounts(data);
+        }
+      })
+      .catch(() => {
+        setAccounts(Accounts);
+      });
+  };
+
+  useEffect(() => {
+    fetchAccounts();
+  }, []);
 
   const handleInputChange = (field: string) => (text: string) => {
     setInputData(prevData => ({
@@ -98,6 +117,24 @@ const MainForm: React.FC = () => {
       return;
     }
     // Proceed with form submission
+    const account = accounts.find(acc => acc.email === inputData.email && acc.pass === inputData.password);
+    if (account) {
+      const user: UserProfile = {
+        email: account.email,
+        familyName: account.name,
+        givenName: account.name,
+        name: account.name,
+        photoUrl: '',
+      };
+      saveData('userLoginStorage', user);
+      isFirst
+          ? navigation.navigate('Welcome', {
+              userData: user,
+            })
+          : navigation.navigate('Main');
+    } else {
+      Alert.alert('Email hoặc mật khẩu không đúng');
+    }
   };
 
   useEffect(() => {

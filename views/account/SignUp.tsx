@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,9 +18,14 @@ import {
   passwordHiddenIcon,
   stocklineIcon,
 } from '../../assets/svgXML';
-import {SignUpInputFieldProps} from '../../services/typeProps';
+import {
+  AccountInterface,
+  SignUpInputFieldProps,
+} from '../../services/typeProps';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Accounts} from '../../services/renderData';
+import {loadData, saveData} from '../../services/storage';
 
 const SignUp = () => {
   useStatusBar('#1A1A1A');
@@ -74,6 +80,7 @@ const FooterView: React.FC = () => {
 };
 
 const MainForm: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [inputData, setInputData] = useState({
     username: '',
     email: '',
@@ -82,6 +89,24 @@ const MainForm: React.FC = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailWarning, setEmailWarning] = useState('');
+  const [accounts, setAccounts] = useState<AccountInterface[]>(Accounts);
+
+  const fetchAccounts = async () => {
+    // Fetch accounts from the database
+    await loadData<AccountInterface[]>('accountsStorage')
+      .then(data => {
+        if (data) {
+          setAccounts(data);
+        }
+      })
+      .catch(() => {
+        setAccounts(Accounts);
+      });
+  };
+
+  useEffect(() => {
+    fetchAccounts();
+  }, []);
 
   const handleInputChange = (field: string) => (text: string) => {
     setInputData(prevData => ({
@@ -106,12 +131,28 @@ const MainForm: React.FC = () => {
     return emailValid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     checkEmailValidation();
     if (!isEmailValid) {
       return;
     }
     // Proceed with form submission
+    accounts.push({
+      name: inputData.username,
+      email: inputData.email,
+      pass: inputData.password,
+    });
+    // Save the new account to the database
+    await saveData('accountsStorage', accounts);
+    Alert.alert('Đăng ký thành công', 'Chuyển đến trang đăng nhập', [
+      {
+        text: 'OK',
+        onPress: () => {
+          // Navigate to the login screen
+          navigation.navigate('Login');
+        },
+      },
+    ]);
   };
 
   useEffect(() => {
