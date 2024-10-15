@@ -53,8 +53,8 @@ const PayMethod: React.FC = () => {
 
     if (!available) {
       Alert.alert(
-        'Error',
-        'Biometric authentication is not available on this device.',
+        'Lỗi',
+        'Xác thực sinh trắc học không khả dụng trên thiết bị này.',
       );
       return;
     }
@@ -64,7 +64,7 @@ const PayMethod: React.FC = () => {
 
     if (!keysExist) {
       const {publicKey} = await rnBiometrics.createKeys();
-      console.log('Public Key:', publicKey);
+      console.log('Khóa công khai:', publicKey);
     }
 
     let epochTimeSeconds = Math.round(new Date().getTime() / 1000).toString();
@@ -72,7 +72,7 @@ const PayMethod: React.FC = () => {
 
     rnBiometrics
       .createSignature({
-        promptMessage: 'Verify your identity',
+        promptMessage: 'Xác minh danh tính của bạn',
         payload: payload,
       })
       .then(resultObject => {
@@ -81,8 +81,8 @@ const PayMethod: React.FC = () => {
         if (success) {
           console.log(signature);
           Alert.alert(
-            'Success',
-            'Successful transaction.',
+            'Thành công',
+            'Giao dịch thành công.',
             [
               {
                 text: 'OK',
@@ -93,13 +93,13 @@ const PayMethod: React.FC = () => {
           );
           // verifySignatureWithServer(signature, payload);
         } else {
-          console.error('Error generating signature:', error);
-          Alert.alert('Error', 'Failed to generate signature.');
+          console.error('Lỗi tạo chữ ký:', error);
+          Alert.alert('Lỗi', 'Không thể tạo chữ ký.');
         }
       })
       .catch(error => {
-        console.error('Biometric error:', error);
-        Alert.alert('Error', 'Biometric authentication failed.');
+        console.error('Lỗi sinh trắc học:', error);
+        Alert.alert('Lỗi', 'Xác thực sinh trắc học thất bại.');
       });
   };
 
