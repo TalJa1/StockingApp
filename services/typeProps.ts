@@ -56,3 +56,8 @@ export interface AccountInterface {
   email: string;
   pass: string;
 }
+
+export interface LoginISFirstTimeProps {
+  isFirst: String[];
+  setIsFirst: React.Dispatch<React.SetStateAction<string[]>>;
+}

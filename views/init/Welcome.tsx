@@ -14,7 +14,6 @@ import {stocklineIcon} from '../../assets/svgXML';
 import {UserProfile} from '../../services/typeProps';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {saveData} from '../../services/storage';
 
 type WelcomeRouteProp = RouteProp<
   {Welcome: {userData: UserProfile}},
@@ -27,7 +26,6 @@ const Welcome = () => {
   const user = route.params.userData;
 
   const handleStart = () => () => {
-    saveData('isFirstTime', false);
     navigation.navigate('Main');
   };
 

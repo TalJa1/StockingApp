@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {centerAll, container, vh, vw} from '../../services/styleSheet';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBar';
@@ -21,46 +21,55 @@ import {
   passwordHiddenIcon,
   stocklineIcon,
 } from '../../assets/svgXML';
-import {AccountInterface, SignUpInputFieldProps, UserProfile} from '../../services/typeProps';
-import {useNavigation} from '@react-navigation/native';
+import {
+  AccountInterface,
+  LoginISFirstTimeProps,
+  SignUpInputFieldProps,
+  UserProfile,
+} from '../../services/typeProps';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
   GoogleSignin,
   isSuccessResponse,
 } from '@react-native-google-signin/google-signin';
 import {loadData, saveData} from '../../services/storage';
-import { Accounts } from '../../services/renderData';
+import {Accounts} from '../../services/renderData';
 
 const Login = () => {
   useStatusBar('#1A1A1A');
-  const [firstTime, setFirstTime] = useState(true);
+  const [firstTime, setFirstTime] = useState<Array<string>>([]);
 
   const fetchIsFirstTime = async () => {
-    loadData<boolean>('isFirstTime')
+    loadData<string[]>('isFirstTime')
       .then(data => {
-        setFirstTime(data);
+        console.log('data', data);
+
+        setFirstTime(data || []);
       })
       .catch(() => {
-        setFirstTime(true);
+        setFirstTime(['123@gmail.com']);
       });
   };
 
-  useEffect(() => {
-    fetchIsFirstTime();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchIsFirstTime();
+    }, []),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <HeaderView />
-        <MainForm isFirst={firstTime}/>
-        <FooterView isFirstTime={firstTime} />
+        <MainForm isFirst={firstTime} setIsFirst={setFirstTime} />
+        <FooterView isFirst={firstTime} setIsFirst={setFirstTime} />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const MainForm: React.FC<{isFirst: boolean}> = ({isFirst}) => {
+const MainForm: React.FC<LoginISFirstTimeProps> = ({isFirst, setIsFirst}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [inputData, setInputData] = useState({
     email: '',
@@ -111,13 +120,15 @@ const MainForm: React.FC<{isFirst: boolean}> = ({isFirst}) => {
     return emailValid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     checkEmailValidation();
     if (!isEmailValid) {
       return;
     }
     // Proceed with form submission
-    const account = accounts.find(acc => acc.email === inputData.email && acc.pass === inputData.password);
+    const account = accounts.find(
+      acc => acc.email === inputData.email && acc.pass === inputData.password,
+    );
     if (account) {
       const user: UserProfile = {
         email: account.email,
@@ -127,11 +138,25 @@ const MainForm: React.FC<{isFirst: boolean}> = ({isFirst}) => {
         photoUrl: '',
       };
       saveData('userLoginStorage', user);
-      isFirst
-          ? navigation.navigate('Welcome', {
-              userData: user,
-            })
-          : navigation.navigate('Main');
+      console.log(
+        !isFirst.find(item => item === `${account.email},${account.name}`),
+      );
+
+      if (!isFirst.find(item => item === `${account.email},${account.name}`)) {
+        setIsFirst([
+          ...isFirst.map(String),
+          `${account.email},${account.name}`,
+        ]);
+        saveData('isFirstTime', [
+          ...isFirst,
+          `${account.email},${account.name}`,
+        ]);
+        navigation.navigate('Welcome', {
+          userData: user,
+        });
+      } else {
+        navigation.navigate('Main');
+      }
     } else {
       Alert.alert('Email hoặc mật khẩu không đúng');
     }
@@ -207,7 +232,7 @@ const InputField: React.FC<SignUpInputFieldProps> = ({
   );
 };
 
-const FooterView: React.FC<{isFirstTime: boolean}> = ({isFirstTime}) => {
+const FooterView: React.FC<LoginISFirstTimeProps> = ({isFirst, setIsFirst}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const handleLoginPress = () => {
     navigation.navigate('SignUp');
@@ -229,7 +254,7 @@ const FooterView: React.FC<{isFirstTime: boolean}> = ({isFirstTime}) => {
         };
         await saveData('userLoginStorage', user);
 
-        isFirstTime
+        isFirst
           ? navigation.navigate('Welcome', {
               userData: user,
             })
