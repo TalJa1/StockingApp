@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Alert,
   ScrollView,
@@ -15,7 +16,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import OTPTextInput from 'react-native-otp-textinput';
 import {PermissionsAndroid, Platform} from 'react-native';
-import { Notifications } from 'react-native-notifications';
+import {Notifications} from 'react-native-notifications';
 
 const OtpVerify = () => {
   useStatusBar('#1A1A1A');
@@ -54,22 +55,25 @@ const OtpVerify = () => {
     requestNotificationPermission();
   }, []);
 
+  const sendNotification = () => {
+    const randomOtp = Math.floor(10000 + Math.random() * 90000).toString();
+    setGeneratedOtp(randomOtp);
+    // Post a local notification
+    Notifications.postLocalNotification({
+      title: 'OTP Xác Minh Tài Khoản',
+      body: `Xin hãy nhập số OTP ${randomOtp} để xác minh tài khoản của bạn`,
+      sound: 'chime.aiff',
+      identifier: '',
+      payload: undefined,
+      badge: 0,
+      type: '',
+      thread: '',
+    });
+  };
+
   useFocusEffect(
     useCallback(() => {
-      const randomOtp = Math.floor(10000 + Math.random() * 90000).toString();
-      setGeneratedOtp(randomOtp);
-      // Post a local notification
-      Notifications.postLocalNotification({
-        title: 'OTP Xác Minh Tài Khoản',
-        body: `Xin hãy nhập số OTP ${randomOtp} để xác minh tài khoản của bạn`,
-        sound: 'chime.aiff',
-        identifier: '',
-        payload: undefined,
-        badge: 0,
-        type: '',
-        thread: '',
-      });
-
+      sendNotification();
       return () => {
         // Clean up any listeners if necessary
       };
@@ -123,6 +127,9 @@ const OtpVerify = () => {
               handleCellTextChange={handleCellTextChange}
             />
           </View>
+          <TouchableOpacity onPress={sendNotification}>
+            <Text style={{color: '#FFED4B', fontWeight: '600'}}>Gửi lại</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.btnSendOTP} onPress={handleVerify}>
             <Text style={styles.btnOtptxt}>Xác minh tài khoản</Text>
           </TouchableOpacity>
@@ -172,7 +179,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   otpContainer: {
-    marginVertical: vh(2),
+    marginTop: vh(2),
   },
   otpInput: {
     borderWidth: 1,
