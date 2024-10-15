@@ -43,8 +43,6 @@ const Login = () => {
   const fetchIsFirstTime = async () => {
     loadData<string[]>('isFirstTime')
       .then(data => {
-        console.log('data', data);
-
         setFirstTime(data || []);
       })
       .catch(() => {
@@ -138,9 +136,6 @@ const MainForm: React.FC<LoginISFirstTimeProps> = ({isFirst, setIsFirst}) => {
         photoUrl: '',
       };
       saveData('userLoginStorage', user);
-      console.log(
-        !isFirst.find(item => item === `${account.email},${account.name}`),
-      );
 
       if (!isFirst.find(item => item === `${account.email},${account.name}`)) {
         setIsFirst([
@@ -254,11 +249,21 @@ const FooterView: React.FC<LoginISFirstTimeProps> = ({isFirst, setIsFirst}) => {
         };
         await saveData('userLoginStorage', user);
 
-        isFirst
-          ? navigation.navigate('Welcome', {
-              userData: user,
-            })
-          : navigation.navigate('Main');
+        if (!isFirst.find(item => item === `${response.data.user.email},${response.data.user.name}`)) {
+          setIsFirst([
+            ...isFirst.map(String),
+            `${response.data.user.email},${response.data.user.name}`,
+          ]);
+          saveData('isFirstTime', [
+            ...isFirst,
+            `${response.data.user.email},${response.data.user.name}`,
+          ]);
+          navigation.navigate('Welcome', {
+            userData: user,
+          });
+        } else {
+          navigation.navigate('Main');
+        }
       } else {
         // sign in was cancelled by user
       }
