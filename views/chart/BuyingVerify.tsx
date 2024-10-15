@@ -47,9 +47,28 @@ const PayMethod: React.FC = () => {
   };
 
   const handleBuy = async () => {
+    const rnBiometrics = new ReactNativeBiometrics();
+
+    const {available} = await rnBiometrics.isSensorAvailable();
+
+    if (!available) {
+      Alert.alert(
+        'Error',
+        'Biometric authentication is not available on this device.',
+      );
+      return;
+    }
+
+    // Generate a key if it doesn't exist
+    const {keysExist} = await rnBiometrics.biometricKeysExist();
+
+    if (!keysExist) {
+      const {publicKey} = await rnBiometrics.createKeys();
+      console.log('Public Key:', publicKey);
+    }
+
     let epochTimeSeconds = Math.round(new Date().getTime() / 1000).toString();
     let payload = epochTimeSeconds + 'some message';
-    const rnBiometrics = new ReactNativeBiometrics();
 
     rnBiometrics
       .createSignature({
@@ -57,7 +76,7 @@ const PayMethod: React.FC = () => {
         payload: payload,
       })
       .then(resultObject => {
-        const {success, signature} = resultObject;
+        const {success, signature, error} = resultObject;
 
         if (success) {
           console.log(signature);
@@ -67,13 +86,20 @@ const PayMethod: React.FC = () => {
             [
               {
                 text: 'OK',
-                onPress: () => navigation.navigate('Main'), // Replace 'MainScreen' with the actual name of your main screen
+                onPress: () => navigation.navigate('Main'), // Replace 'Main' with the actual name of your main screen
               },
             ],
             {cancelable: false},
           );
           // verifySignatureWithServer(signature, payload);
+        } else {
+          console.error('Error generating signature:', error);
+          Alert.alert('Error', 'Failed to generate signature.');
         }
+      })
+      .catch(error => {
+        console.error('Biometric error:', error);
+        Alert.alert('Error', 'Biometric authentication failed.');
       });
   };
 
