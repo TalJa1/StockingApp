@@ -127,6 +127,8 @@ const MainForm: React.FC<LoginISFirstTimeProps> = ({isFirst, setIsFirst}) => {
     const account = accounts.find(
       acc => acc.email === inputData.email && acc.pass === inputData.password,
     );
+    console.log('account', accounts);
+
     if (account) {
       const user: UserProfile = {
         email: account.email,
@@ -249,7 +251,12 @@ const FooterView: React.FC<LoginISFirstTimeProps> = ({isFirst, setIsFirst}) => {
         };
         await saveData('userLoginStorage', user);
 
-        if (!isFirst.find(item => item === `${response.data.user.email},${response.data.user.name}`)) {
+        if (
+          !isFirst.find(
+            item =>
+              item === `${response.data.user.email},${response.data.user.name}`,
+          )
+        ) {
           setIsFirst([
             ...isFirst.map(String),
             `${response.data.user.email},${response.data.user.name}`,

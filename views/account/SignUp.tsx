@@ -87,7 +87,6 @@ const MainForm: React.FC = () => {
     password: '',
   });
   const [isFormValid, setIsFormValid] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailWarning, setEmailWarning] = useState('');
   const [accounts, setAccounts] = useState<AccountInterface[]>(Accounts);
 
@@ -126,36 +125,36 @@ const MainForm: React.FC = () => {
     const {email} = inputData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emailValid = emailRegex.test(email);
-    setIsEmailValid(emailValid);
     setEmailWarning(emailValid ? '' : 'Email không hợp lệ');
     return emailValid;
   };
 
   const handleSubmit = async () => {
-    checkEmailValidation();
+    const isEmailValid = checkEmailValidation();
     if (!isEmailValid) {
       Alert.alert('Lỗi', 'Email không hợp lệ');
       return;
-    }
-    // Proceed with form submission
-    const newAccount = {
-      name: inputData.username,
-      email: inputData.email,
-      pass: inputData.password,
-    };
-    const updatedAccounts = [...accounts, newAccount];
-    setAccounts(updatedAccounts);
-    // Save the new account to the database
-    await saveData('accountsStorage', accounts);
-    Alert.alert('Đăng ký thành công', 'Chuyển đến trang đăng nhập', [
-      {
-        text: 'OK',
-        onPress: () => {
-          // Navigate to the login screen
-          navigation.navigate('Login');
+    } else {
+      // Proceed with form submission
+      const newAccount = {
+        name: inputData.username,
+        email: inputData.email,
+        pass: inputData.password,
+      };
+      const updatedAccounts = [...accounts, newAccount];
+      setAccounts(updatedAccounts);
+      // Save the new account to the database
+      await saveData('accountsStorage', updatedAccounts);
+      Alert.alert('Đăng ký thành công', 'Chuyển đến trang đăng nhập', [
+        {
+          text: 'OK',
+          onPress: () => {
+            // Navigate to the login screen
+            navigation.navigate('Login');
+          },
         },
-      },
-    ]);
+      ]);
+    }
   };
 
   useEffect(() => {
