@@ -134,14 +134,17 @@ const MainForm: React.FC = () => {
   const handleSubmit = async () => {
     checkEmailValidation();
     if (!isEmailValid) {
+      Alert.alert('Lỗi', 'Email không hợp lệ');
       return;
     }
     // Proceed with form submission
-    accounts.push({
+    const newAccount = {
       name: inputData.username,
       email: inputData.email,
       pass: inputData.password,
-    });
+    };
+    const updatedAccounts = [...accounts, newAccount];
+    setAccounts(updatedAccounts);
     // Save the new account to the database
     await saveData('accountsStorage', accounts);
     Alert.alert('Đăng ký thành công', 'Chuyển đến trang đăng nhập', [
