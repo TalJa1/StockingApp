@@ -410,6 +410,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 16,
     paddingHorizontal: vw(3),
+    color: 'white',
   },
   inputContainer: {
     flexDirection: 'row',
