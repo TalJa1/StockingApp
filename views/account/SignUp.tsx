@@ -135,12 +135,21 @@ const MainForm: React.FC = () => {
       Alert.alert('Lỗi', 'Email không hợp lệ');
       return;
     } else {
+      const emailExists = accounts.find(
+        account => account.email === inputData.email,
+      );
+      if (emailExists) {
+        Alert.alert('Lỗi', 'Email đã tồn tại');
+        return;
+      }
+
       // Proceed with form submission
       const newAccount = {
         name: inputData.username,
         email: inputData.email,
         pass: inputData.password,
       };
+
       const updatedAccounts = [...accounts, newAccount];
       setAccounts(updatedAccounts);
       // Save the new account to the database
