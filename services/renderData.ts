@@ -309,7 +309,7 @@ export const IntroduceCompanyData = [
     employees: 13000,
     foundingData: '29 thg 8, 1997',
     headquarters: 'Los Gatos, California, Hoa Kỳ',
-    ceo: 'Reed Hastings',
+    ceo: 'Greg Peters, Ted Sarandos',
     briefDescription:
       'Netflix, Inc. là một công ty giải trí truyền phát trực tuyến Mỹ được thành lập vào năm 1997 bởi Reed Hastings và Marc Randolph. Trụ sở chính của công ty đặt tại Los Gatos, California. Netflix là một trong những dịch vụ truyền phát trực tuyến lớn nhất trên thế giới với hơn 200 triệu người dùng trên toàn thế giới.',
   },
